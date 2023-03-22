@@ -36,7 +36,7 @@ public class Student {
 
     public void   setYear(int year)        { this.stuYear = year; }
 
-    //Return value: -1 = Error; 0 = Success; 1 = Not Found the ID; 2=WrongPassword ;
+    //Return value: -1 = Error; 0 = Success; 1 = Not Found the ID; 2 = WrongPassword;
     public int readInfo(String ID, String PassWord){
         try{
             int resStatus = 1;
@@ -46,6 +46,8 @@ public class Student {
 
             //Read a line one by one
             while(oneline!=null){
+                //Data format: StuID StuPassWord stuMajor stuSchool stuYear
+                //         oneStu[0] oneStu[1]  oneStu[2] oneStu[3] oneStu[4]
                 String[] oneStu = oneline.split(" ");
                 if(oneStu[0]==ID){
                     if(oneStu[1]==PassWord){
