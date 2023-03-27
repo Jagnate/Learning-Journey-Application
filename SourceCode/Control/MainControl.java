@@ -31,7 +31,7 @@ public class MainControl {
                 //Data format: StuID  StuName    StudentBirth StuMajor   StuSchool  StuYear
                 //         oneInfo[0] oneInfo[1]  oneInfo[2]  oneInfo[3] oneInfo[4] oneInfo[5]
                 String[] oneInfo = oneline.split(" ");
-                if(oneInfo[0]==ID){
+                if(oneInfo[0].equals(ID)){
                     stu.setName(oneInfo[1]);
                     stu.setBirth(Integer.parseInt(oneInfo[2]));
                     stu.setMajor(oneInfo[3]);
