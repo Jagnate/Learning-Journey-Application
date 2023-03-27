@@ -1,3 +1,14 @@
+/**
+ *  Title      : MainControl.java
+ *  Description: This class is in charge of 
+ * reading information from database(i.e. txt file).
+ * 
+ *  In this version, complete the funcion of read basic info from database
+ *  @author  Jin Si
+ *  @version 1.0
+ * 
+ */
+
 package SourceCode.Control;
 
 import java.io.*;
