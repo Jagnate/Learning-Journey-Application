@@ -18,7 +18,7 @@ public class LoginControl {
             //Read a line one by one
             while(oneline!=null){
                 String[] oneInfo = oneline.split(" ");
-                if(oneInfo[0]==ID){
+                if(oneInfo[0].equals(ID)){
                     if(oneInfo[1]==PassWord){
                         //To be updated with UI
                         System.out.println("Successfully!");
