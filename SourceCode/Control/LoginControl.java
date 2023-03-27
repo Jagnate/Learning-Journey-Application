@@ -1,3 +1,14 @@
+/**
+ *  Title      : LoginControl.java
+ *  Description: This class is in charge of reading information from interface 
+ *  and checking the info from database(i.e. txt file).
+ * 
+ *  In this version, I set up the basic checkID method
+ *  @author  Jin Si
+ *  @version 1.0
+ * 
+ */
+
 package SourceCode.Control;
 
 import java.io.*;
