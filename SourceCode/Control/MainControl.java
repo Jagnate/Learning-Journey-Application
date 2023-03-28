@@ -1,55 +1,86 @@
 /**
- *  Title      : MainControl.java
- *  Description: This class is in charge of 
- * reading information from database(i.e. txt file).
+ *  Title      : MainFrame.java
+ *  Description: This class is the main interface of the learning journey application 
+ *  which shows the basic information
  * 
- *  In this version, complete the funcion of read basic info from database
+ *  In this version, I set up the physical keyboard and 30 blocks for basic game style
  *  @author  Jin Si
  *  @version 1.0
  * 
  */
 
-package SourceCode.Control;
+package Boundary;
 
-import java.io.*;
+import javax.swing.*;
 
-import SourceCode.Entity.Student;
+import Control.MainControl;
 
-public class MainControl {
+public class MainFrame extends JFrame{
 
-    private Student stu = new Student();
+    //private String      stuID      = new String();
+    
+    private JMenuBar    menuBar    = new JMenuBar();
+    private JMenu       courseMenu = new JMenu("Courses");
+    private JMenuItem   compItem   = new JMenuItem("Compulsory");
+    private JMenuItem   eleItem    = new JMenuItem("Elective"); //To be confirmed
+    private JPanel      mainPalne  = new JPanel();
+    private JLabel      nameLabel  = new JLabel();
+    private JLabel      birthLabel = new JLabel();
+    private JLabel      majorLabel = new JLabel();
+    private JLabel      schoolLabel= new JLabel();
+    private JLabel      yearLabel  = new JLabel();  
 
-    public void readInfo(String ID){
-        try{
+    private MainControl control    = new MainControl();
 
-            FileReader     fileReader     = new FileReader(Student.database);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String         oneline        = bufferedReader.readLine();
+    public MainFrame(){
+        super("Start your Learning Journey!");
+        setFrame();
+        setMenu();
+        mainLayout();
+        //this.setVisible(true);
+    }
 
-            //Read a line one by one
-            while(oneline!=null){
-                //Data format: StuID  StuName    StudentBirth StuMajor   StuSchool  StuYear
-                //         oneInfo[0] oneInfo[1]  oneInfo[2]  oneInfo[3] oneInfo[4] oneInfo[5]
-                String[] oneInfo = oneline.split(" ");
-                if(oneInfo[0].equals(ID)){
-                    stu.setName(oneInfo[1]);
-                    stu.setBirth(Integer.parseInt(oneInfo[2]));
-                    stu.setMajor(oneInfo[3]);
-                    stu.setSchool(oneInfo[4]);
-                    stu.setYear(Integer.parseInt(oneInfo[5]));
-                    break;   
-                }
-                oneline = bufferedReader.readLine();
-            }
 
-            fileReader.close();
-            bufferedReader.close();
+    private void setFrame(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(500,700);
+    }
 
-        }catch(IOException e){
-            //To be updated with UI
-            System.err.println(e);
-            System.exit(-1);;
-        }
+    private void setMenu(){
+        menuBar.add(courseMenu);
+        courseMenu.add(compItem);
+        courseMenu.add(eleItem);
+        this.setJMenuBar(menuBar);
+    }
+
+    private void showInfo(){
+        //Wait LoginControl to input the valid studentID
+        control.readInfo("jp2020213326");
+        nameLabel.setText(control.stu.getName());
+        birthLabel.setText(Integer.toString(control.stu.getBirth()));
+        majorLabel.setText(control.stu.getMajor());
+        schoolLabel.setText(control.stu.getSchool());
+        yearLabel.setText(control.stu.getSchool());
+    }
+
+    private void mainLayout(){
+        this.add(mainPalne);
+        mainPalne.setLayout(null);
+
+        showInfo();
+        nameLabel.setBounds(30, 20, 50, 50);
+        mainPalne.add(nameLabel);
+
+        birthLabel.setBounds(80, 20, 50, 50);
+        mainPalne.add(birthLabel);
+
+        majorLabel.setBounds(130, 20, 150, 50);
+        mainPalne.add(majorLabel);
+
+        schoolLabel.setBounds(280, 20, 100, 50);
+        mainPalne.add(schoolLabel);
+
+        yearLabel.setBounds(400, 20, 100, 50);
+        mainPalne.add(yearLabel);
     }
 }
-
