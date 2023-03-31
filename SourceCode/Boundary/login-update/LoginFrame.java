@@ -12,6 +12,8 @@ import javax.swing.border.MatteBorder;
 import java.net.URL;
 
 public class LoginFrame extends JFrame{
+	
+    private MainControl maincountrol = new MainControl();
     // create a content panel component to add other components
 //    private JPanel contentPanel = new JPanel();
     private JPanel contentPanel = new MyDrawPanel();
