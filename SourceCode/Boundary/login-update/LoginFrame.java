@@ -1,47 +1,52 @@
-/**
+package Boundary; /**
  * A class that provides a login and register interface for users.
  * @author Yuxuan Liu
  * @version 1.0
- * 
+ *
  */
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
+import javax.swing.JOptionPane;
 import javax.swing.border.MatteBorder;
 import java.net.URL;
 
-public class LoginFrame extends JFrame{
-	
-    private MainControl maincountrol = new MainControl();
+import SourceCode.Control.MainControl;
+import SourceCode.Control.LoginControl;
+public class LoginFrame extends JFrame
+{
     // create a content panel component to add other components
-//    private JPanel contentPanel = new JPanel();
+//    private JPanl contentPanel = new JPanel();
     private JPanel contentPanel = new MyDrawPanel();
+
+    private LoginControl logincontrol = new LoginControl();
+    private MainControl maincountrol = new MainControl();
     // create button components
     private JButton login = new JButton("Log In");
     private JButton register = new JButton("Create your account");
     private JButton hint = new JButton();
-   // create label components to provide information
+    // create label components to provide information
     private GradientTextPanel title = new GradientTextPanel();
-//    private JLabel title = new JLabel("Log In");
+    //    private JLabel title = new JLabel("Log In");
     private JLabel accHint = new JLabel("Account ID:");
     // create url, icon, image ,buffered image to resize and sett icon components
     private URL urlAcc = LoginFrame.class.getResource("iconAcc.png");
-    private Icon iconAcc = new ImageIcon(urlAcc); 
+    private Icon iconAcc = new ImageIcon(urlAcc);
     private Image imgAcc = ((ImageIcon)iconAcc).getImage();
     private int widthAcc = imgAcc.getWidth(null);
     private int heightAcc = imgAcc.getWidth(null);
     private BufferedImage tagAcc = new BufferedImage((int)(0.01 * widthAcc), (int)(0.01 * heightAcc),BufferedImage.TYPE_INT_RGB);
-	private Icon newIconAcc = new ImageIcon(tagAcc);
+    private Icon newIconAcc = new ImageIcon(tagAcc);
 
     private JLabel pswHint = new JLabel("Password:");
     private URL urlPsw = LoginFrame.class.getResource("iconPsw.png");
-    private Icon iconPsw = new ImageIcon(urlPsw); 
+    private Icon iconPsw = new ImageIcon(urlPsw);
     private Image imgPsw = ((ImageIcon)iconPsw).getImage();
     private int widthPsw = imgPsw.getWidth(null);
     private int heightPsw = imgPsw.getWidth(null);
     private BufferedImage tagPsw = new BufferedImage((int)(0.015 * widthPsw), (int)(0.015 * heightPsw),BufferedImage.TYPE_INT_RGB);
-	private Icon newIconPsw = new ImageIcon(tagPsw);
+    private Icon newIconPsw = new ImageIcon(tagPsw);
 
     private JLabel forgetHint = new JLabel("Forget your password?", SwingConstants.CENTER);
     private JLabel regHint = new JLabel("--------New to application?--------", SwingConstants.CENTER);
@@ -82,12 +87,12 @@ public class LoginFrame extends JFrame{
         accHint.setBounds(40, 130, 100, 25);
         accHint.setForeground(new Color(25,25,112));
         accHint.setIcon(newIconAcc);
-		tagAcc.getGraphics().drawImage(imgAcc, 0, 0, (int)(0.01 * widthAcc), (int)(0.01 * heightAcc), null); 
+        tagAcc.getGraphics().drawImage(imgAcc, 0, 0, (int)(0.01 * widthAcc), (int)(0.01 * heightAcc), null);
         accNum.setBounds(160, 130, 150, 25);
         pswHint.setBounds(40, 200, 100, 25);
         pswHint.setForeground(new Color(25,25,112));
         pswHint.setIcon(newIconPsw);
-		tagPsw.getGraphics().drawImage(imgPsw, 0, 0, (int)(0.015 * widthPsw), (int)(0.015 * heightPsw), null);
+        tagPsw.getGraphics().drawImage(imgPsw, 0, 0, (int)(0.015 * widthPsw), (int)(0.015 * heightPsw), null);
         psw.setBounds(160, 200, 150, 25);
         forgetHint.setBounds(0, 240, 350, 25);
         forgetHint.setForeground(new Color(25,25,112));
@@ -105,9 +110,9 @@ public class LoginFrame extends JFrame{
 
         // components transparency
         accNum.setOpaque(true);
-		psw.setOpaque(true);
-		contentPanel.setOpaque(false);
-		getContentPane().add(contentPanel);
+        psw.setOpaque(true);
+        contentPanel.setOpaque(false);
+        getContentPane().add(contentPanel);
         // set the component border format
         textSet(accNum);
         textSet(psw);
@@ -132,11 +137,11 @@ public class LoginFrame extends JFrame{
      * @param field to be set
      */
     private void textSet(JTextField field) {
-		field.setBackground(new Color(255, 255, 255));
-		field.setPreferredSize(new Dimension(150, 28));
-		MatteBorder border = new MatteBorder(0, 0, 2, 0, new Color(192, 192, 192));
-		field.setBorder(border);
-	}
+        field.setBackground(new Color(255, 255, 255));
+        field.setPreferredSize(new Dimension(150, 28));
+        MatteBorder border = new MatteBorder(0, 0, 2, 0, new Color(192, 192, 192));
+        field.setBorder(border);
+    }
 
     /**
      * This method sets event listening.
@@ -164,12 +169,30 @@ public class LoginFrame extends JFrame{
 
 
     public void loginControl(){
-
+        String tempID = "1";
+        String temppassword = "0";
+        logincontrol.checkID(tempID,temppassword);
+        if(tempID.equals("0")){
+            JOptionPane.showMessageDialog(null, "wrong password!");
+        }
+        else{
+            maincountrol.stu.setID(tempID);
+            JOptionPane.showMessageDialog(null, "Successfully!");
+        }
     }
     public void registerControl(){
 
     }
 
+
+
+    public static void main(String[] args){
+        LoginFrame myFrame = new LoginFrame();
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setVisible(true);
+    }
+
+}
 
 
     public static void main(String[] args){
