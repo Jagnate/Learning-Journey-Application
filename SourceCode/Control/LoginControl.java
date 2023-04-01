@@ -19,7 +19,7 @@ public class LoginControl {
     
     // -1 = Not Found StudentID; 0 = Success ; 1 = Wrong Password
     public int checkID(String ID, String PassWord){
-        int resStatus = -1;
+        string resStatus = "-1";
         try{
             
             FileReader     fileReader     = new FileReader(Student.userLog);
@@ -31,14 +31,10 @@ public class LoginControl {
                 String[] oneInfo = oneline.split(" ");
                 if(oneInfo[0].equals(ID)){
                     if(oneInfo[1]==PassWord){
-                        //To be updated with UI
-                        System.out.println("Successfully!");
-                        resStatus = 0;
+                        resStatus = ID;
                     }
                     else{
-                        //To be updated with UI
-                        System.out.println("Wrong PassWord!");
-                        resStatus = 1;
+                        resStatus = "1";
                     }
                     break; 
                 }
