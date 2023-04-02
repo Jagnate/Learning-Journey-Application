@@ -18,8 +18,8 @@ import SourceCode.Entity.Student;
 public class LoginControl {
     
     // -1 = Not Found StudentID; 0 = Success ; 1 = Wrong Password
-    public int checkID(String ID, String PassWord){
-        string resStatus = "-1";
+    public String checkID(String ID, String PassWord){
+        String resStatus = "-1";
         try{
             
             FileReader     fileReader     = new FileReader(Student.userLog);
