@@ -6,14 +6,17 @@
  *  In this version, I set up the basic checkID method
  *  @author  Jin Si
  *  @version 1.0
- * 
+ *  
+ *  In this version, Yilun and Yuanchi fix some bugs and 
+ *  use String instead of int as a status so it can return ID directly
+ *  @author Yilun Deng
+ *  @author Yuanchi Zhou
  */
 
-package SourceCode.Control;
+package Control;
 
 import java.io.*;
-
-import SourceCode.Entity.Student;
+import Entity.Student;
 
 public class LoginControl {
     
@@ -22,7 +25,7 @@ public class LoginControl {
         String resStatus = "-1";
         try{
             
-            FileReader     fileReader     = new FileReader(Student.userLog);
+            FileReader     fileReader     = new FileReader("./Entity/"+Student.userLog);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
 
@@ -30,10 +33,11 @@ public class LoginControl {
             while(oneline!=null){
                 String[] oneInfo = oneline.split(" ");
                 if(oneInfo[0].equals(ID)){
-                    if(oneInfo[1]==PassWord){
+                    if(oneInfo[1].equals(PassWord)){
                         resStatus = ID;
                     }
                     else{
+                        System.out.println(oneInfo[1]);
                         resStatus = "1";
                     }
                     break; 
