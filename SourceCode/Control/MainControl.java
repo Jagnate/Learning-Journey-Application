@@ -9,20 +9,20 @@
  *
  */
 
-package SourceCode.Control;
+package Control;
 
 import java.io.*;
 
-import SourceCode.Entity.Student;
+import Entity.Student;
 
 public class MainControl {
 
     public Student stu = new Student();
 
-    public void readInfo(String ID){
+    public void readInfo(){
         try{
 
-            FileReader     fileReader     = new FileReader(Student.database);
+            FileReader     fileReader     = new FileReader("./Entity/"+Student.database);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
 
@@ -31,7 +31,7 @@ public class MainControl {
                 //Data format: StuID  StuName    StudentBirth StuMajor   StuSchool  StuYear
                 //         oneInfo[0] oneInfo[1]  oneInfo[2]  oneInfo[3] oneInfo[4] oneInfo[5]
                 String[] oneInfo = oneline.split(" ");
-                if(oneInfo[0].equals(ID)){
+                if(oneInfo[0].equals(stu.getID())){
                     stu.setName(oneInfo[1]);
                     stu.setBirth(Integer.parseInt(oneInfo[2]));
                     stu.setMajor(oneInfo[3]);
