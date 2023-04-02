@@ -169,11 +169,12 @@ public class LoginFrame extends JFrame
 
 
     public void loginControl(){
-        String tempID = "1";
-        String temppassword = "0";
-        logincontrol.checkID(tempID,temppassword);
-        if(tempID.equals("0")){
+        String temID = logincontrol.checkID(accNum.getText(),psw.getText());
+        if(tempID.equals("1")){
             JOptionPane.showMessageDialog(null, "wrong password!");
+        }
+        else  if(tempID.equals("-1")){
+            JOptionPane.showMessageDialog(null, "Not Found StudentID!");
         }
         else{
             maincountrol.stu.setID(tempID);
