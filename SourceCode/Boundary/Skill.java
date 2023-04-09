@@ -14,18 +14,18 @@ import java.awt.event.MouseListener;
 
 public class Skill extends JFrame {
 
-    JCheckBox[] check;
-    JPanel p1 = new JPanel();
-    JPanel p2 = new JPanel();
+    JCheckBox[]  check;
+    JPanel       p1 = new JPanel();
+    JPanel       p2 = new JPanel();
     JProgressBar jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,6);
-    int value = 0;
-    boolean[] tick = new boolean[6];
-    boolean[] isSelected = new boolean[6];
+    int          value = 0;
+    boolean[]    tick = new boolean[6];
+    boolean[]    isSelected = new boolean[6];
 
     public void init(String title){
         setTitle(title);
-        setBounds(100, 100, 600, 400);
-        setLayout(new FlowLayout(FlowLayout.CENTER,400,40));
+        setBounds(100, 100, 400, 500);
+        setLayout(new FlowLayout(FlowLayout.CENTER,400,50));
         addSkills();
         setP1();
         setP2();
@@ -34,6 +34,7 @@ public class Skill extends JFrame {
         container.add(p1);
         container.add(p2);
     }
+
     public void addSkills(){
         check = new JCheckBox[6];
         isSelected[0] = true;
@@ -56,16 +57,15 @@ public class Skill extends JFrame {
                 check[i].removeMouseListener((MouseListener) eventListener); 
             } 
             check[i].setFocusable(false); 
-        }
-        
+        }        
     }
 
     public void setP1(){
         for (int i = 0; i < 6; i++) {
             p1.add(check[i]);
         }
-        p1.setLayout(new FlowLayout(FlowLayout.CENTER,400,10));
-        p1.setPreferredSize(new Dimension(300,220));
+        p1.setLayout(new FlowLayout(FlowLayout.CENTER,400,15));
+        p1.setPreferredSize(new Dimension(300,270));
         p1.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
@@ -78,6 +78,7 @@ public class Skill extends JFrame {
 
     public void setJProgressBar(){
         jProgressBar.setStringPainted(true);
+        jProgressBar.setFont(new Font("Arial", Font.PLAIN, 18));
         new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,7 +94,5 @@ public class Skill extends JFrame {
             }
         }).start();
     }
-
-
 }
 

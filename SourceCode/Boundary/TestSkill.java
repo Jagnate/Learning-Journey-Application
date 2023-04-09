@@ -9,6 +9,7 @@ public class TestSkill {
     public static void main(String[] args) {
         Skill frame = new Skill();
         frame.init("MySkills");
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
