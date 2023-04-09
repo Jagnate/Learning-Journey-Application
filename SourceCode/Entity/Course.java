@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Course {
     
-    private ArrayList<Course> skillList = new ArrayList<Course>();
+    private ArrayList<Skill> skillList = new ArrayList<Skill>();
     
     private String  courseName;
     private int     credit;
