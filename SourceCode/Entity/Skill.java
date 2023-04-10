@@ -5,10 +5,9 @@ public class Skill {
     private ArrayList<Course> courseList = new ArrayList<Course>();
     private String skillName;
     private boolean gotten;
-    private int i;
 
-    public Course getCourse(){
-        return courseList.get(i);
+    public Course getCourse(int index){
+        return courseList.get(index);
     }
 
     public void setCourse(Course newCourse){
