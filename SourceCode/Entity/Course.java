@@ -9,10 +9,9 @@ public class Course {
     private boolean completed; 
     private boolean pass;
     private boolean courseType; //true compuslory; false optional
-    private int i;
 
-    public Skill getSkill(){
-        return skillList.get(i);
+    public Skill getSkill(int index){
+        return skillList.get(index);
     }
 
     public void setSkill(Skill newSkill){
