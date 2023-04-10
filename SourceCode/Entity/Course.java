@@ -9,6 +9,7 @@ public class Course {
     private boolean completed; 
     private boolean pass;
     private boolean courseType; //true compuslory; false optional
+    private int     year;
 
     public Skill getSkill(int index){
         return skillList.get(index);
@@ -64,5 +65,13 @@ public class Course {
  
     public void setCourseType(boolean courseType) {
         this.courseType = courseType;
+    }
+
+    public void setYear(int year){
+        this.year = year;
+    }
+
+    public int getYear(){
+        return this.year;
     }
 }
