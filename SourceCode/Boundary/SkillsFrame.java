@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.EventListener;
 import java.awt.event.MouseListener;
 
-public class Skill extends JFrame {
+public class SkillsFrame extends JFrame {
 
     JCheckBox[]  check;
     JPanel       p1 = new JPanel();
