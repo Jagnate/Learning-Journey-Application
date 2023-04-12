@@ -1,0 +1,4 @@
+index skillName CoursesRequired
+1 MathSkill
+2 EnglishSkill
+3 CodingSkill 
