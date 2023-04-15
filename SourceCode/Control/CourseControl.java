@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.io.*;
       
-public class Control{
+public class CourseControl{
 
     public ArrayList<Course> course1 = new ArrayList<Course>();  //主函数
     Course course2 = new Course();
