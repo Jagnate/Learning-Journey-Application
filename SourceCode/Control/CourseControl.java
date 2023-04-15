@@ -1,4 +1,4 @@
-//package Entity;
+package Entity;
 import java.util.ArrayList;
 import java.io.*;
       
@@ -8,6 +8,7 @@ public class CourseControl{
     Course course2 = new Course();
 
     public void readInfo(String ID, int year){
+
         try{
 
             FileReader     fileReader     = new FileReader("Courses.txt");
@@ -30,7 +31,6 @@ public class CourseControl{
                 for (int i = 0; i < len; i++) {
                     course2.skillList.add(Integer.parseInt(oneInfo2[i]));
                 }
-
                 course1.add(course2);
                 oneline = bufferedReader.readLine();
             }
@@ -38,9 +38,18 @@ public class CourseControl{
             fileReader.close();
             bufferedReader.close();
 
-            fileReader     = new FileReader("StuCourse.txt");
-            bufferedReader = new BufferedReader(fileReader);
-            oneline        = bufferedReader.readLine();
+        }catch(IOException e){
+            //To be updated with UI
+            System.err.println(e);
+            System.exit(-1);
+        }
+
+        
+        try{
+
+            FileReader     fileReader     = new FileReader("StuCourse.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String         oneline        = bufferedReader.readLine();
 
             //Read a line one by one
             while(oneline!=null){
@@ -48,13 +57,11 @@ public class CourseControl{
                 String[] oneInfo = oneline.split(" ");
 
                 if(oneInfo[0].equals(ID)){
-
                     String[] oneInfo2 = oneInfo[1].split(".");
                     int len = oneInfo2.length;
                     for (int i = 0; i < len; i++) {
                              course1.get(Integer.parseInt(oneInfo2[i])).setTolearn(true);
                     }
-                    
                 }
                 oneline = bufferedReader.readLine();
             }
@@ -62,11 +69,17 @@ public class CourseControl{
             fileReader.close();
             bufferedReader.close();
 
+        }catch(IOException e){
+            //To be updated with UI
+            System.err.println(e);
+            System.exit(-1);
+        }
 
+        try{
 
-            fileReader     = new FileReader("StuGPA.txt");
-            bufferedReader = new BufferedReader(fileReader);
-            oneline        = bufferedReader.readLine();
+            FileReader     fileReader     = new FileReader("StuGPA.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String         oneline        = bufferedReader.readLine();
 
             //Read a line one by one
             while(oneline!=null){
@@ -88,25 +101,28 @@ public class CourseControl{
 
             fileReader.close();
             bufferedReader.close();
-
-            for (Course i : course1) {
-                if(i.getYear()<year-2020 && i.getTolearn()==true){
-                    i.setCompleted(false);
-                }
-                if(i.getYear()>=year-2020 && i.getTolearn()==true){
-                    i.setCompleted(true);
-                }
-            }
-
+            
         }catch(IOException e){
             //To be updated with UI
             System.err.println(e);
             System.exit(-1);
         }
+        
+        for (Course i : course1) {
+            if(i.getYear()<year-2020 && i.getTolearn()==true){
+                i.setCompleted(false);
+            }
+            if(i.getYear()>=year-2020 && i.getTolearn()==true){
+                i.setCompleted(true);
+            }
+        }
+
     }
 
-    /*public static void main(String[] args) {
-       Control test = new Control();
+    public static void main(String[] args) {
+        CourseControl test = new CourseControl();
        test.readInfo("aaaa",2022);
-    }*/
+    }
+
+
 }
