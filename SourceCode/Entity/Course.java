@@ -1,23 +1,20 @@
+//package Entity;
 import java.util.ArrayList;
 
 public class Course {
     
-    private ArrayList<Skill> skillList = new ArrayList<Skill>();
+    
+    public ArrayList<Integer> skillList = new ArrayList<Integer>();
+    private int     Index;
     private String  courseName;
     private int     credit;
     private int     GPA;
-    private boolean completed; 
+    private boolean completed;
+    private boolean tolearn;  
     private boolean pass;
     private boolean courseType; //true compuslory; false optional
     private int     year;
 
-    public Skill getSkill(int index){
-        return skillList.get(index);
-    }
-
-    public void setSkill(Skill newSkill){
-        skillList.add(newSkill);
-    }
 
     public String getCourseName() {
         return this.courseName;
@@ -33,6 +30,22 @@ public class Course {
  
     public void setCredit(int credit) {
         this.credit = credit;
+    }
+
+    public boolean getTolearn() {
+        return this.tolearn;
+    }
+ 
+    public void setTolearn(Boolean tolearn) {
+        this.tolearn = tolearn;
+    }
+
+    public int getIndex() {
+        return this.Index;
+    }
+ 
+    public void setIndex(int Index) {
+        this.credit = Index;
     }
 
     public int getGPA() {
