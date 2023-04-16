@@ -1,4 +1,5 @@
-//package Entity;
+package Entity;
+
 import java.util.ArrayList;
 
 public class Course {
@@ -14,7 +15,6 @@ public class Course {
     private boolean pass;
     private boolean courseType; //true compuslory; false optional
     private int     year;
-
 
     public String getCourseName() {
         return this.courseName;

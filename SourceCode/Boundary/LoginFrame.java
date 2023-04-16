@@ -64,7 +64,6 @@ public class LoginFrame extends JFrame
     public LoginFrame(){
         this.init();
         this.addListener();
-        
     }
 
     /**

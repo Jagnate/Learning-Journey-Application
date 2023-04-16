@@ -1,5 +1,9 @@
+package Control;
+
 import java.util.*;
 import java.io.*;
+
+import Entity.Skill;
 
 public class SkillsControl {
     
@@ -17,8 +21,8 @@ public class SkillsControl {
 
     public void readtoLearnSkills(String ID){
         try{
-            //FileReader     fileReader     = new FileReader("./Entity/StuGPA.txt");
-            FileReader     fileReader     = new FileReader("StuCourse.txt");
+            FileReader     fileReader     = new FileReader("./Entity/StuCourse.txt");
+            //FileReader     fileReader     = new FileReader("StuCourse.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             //Read a line one by one
@@ -26,13 +30,10 @@ public class SkillsControl {
             while(oneline!=null){
                 String[] oneInfo = oneline.split(" ");
                 if(oneInfo[0].equals(ID)){
-                    System.out.println(oneInfo[2]);
                     String[] tempList = oneInfo[2].split("_");
-                    System.out.println(tempList[0]);
                     for(int i=0;i<tempList.length;i++){
                         toLearnSkillList.add(Integer.parseInt(tempList[i]));
                     }
-                    System.out.println(toLearnSkillList.size());
                     break;
                 }
                 oneline = bufferedReader.readLine();
@@ -48,8 +49,8 @@ public class SkillsControl {
 
     public void readSkills(){
         try{
-            //FileReader     fileReader     = new FileReader("./Entity/StuGPA.txt");
-            FileReader     fileReader     = new FileReader("Skills.txt");
+            FileReader     fileReader     = new FileReader("./Entity/Skills.txt");
+            //FileReader     fileReader     = new FileReader("Skills.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             //Read a line one by one
@@ -85,8 +86,8 @@ public class SkillsControl {
 
     public void readLearnedCourses(String ID){
         try{
-            //FileReader     fileReader     = new FileReader("./Entity/StuGPA.txt");
-            FileReader     fileReader     = new FileReader("StuGPA.txt");
+            FileReader     fileReader     = new FileReader("./Entity/StuGPA.txt");
+            //FileReader     fileReader     = new FileReader("StuGPA.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             //Read a line one by one
@@ -115,12 +116,10 @@ public class SkillsControl {
             int[] flag = new int[skillslist.get(i).courseList.get(skillslist.get(i).courseList.size()-1)];
             if(skillslist.get(i).courseList.size()>CourseLearnedList.size()){
                 skillslist.get(i).setAccquired(false);
-                System.out.println("!!!");
                 continue;
             }else{
                 for(int j=0;j<CourseLearnedList.size();j++){
                     flag[CourseLearnedList.get(j)-1] = 1;
-                    System.out.println("!!");
                 }
                 for(int k=0;k<skillslist.get(i).courseList.size();k++){
                     skillslist.get(i).setAccquired(true);

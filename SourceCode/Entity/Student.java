@@ -1,6 +1,4 @@
-package SourceCode.Entity;
-
-//import java.io.*;
+package Entity;
 
 public class Student {
 

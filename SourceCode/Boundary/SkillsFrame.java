@@ -4,6 +4,7 @@
  * @data 2023/4/8 14:59
  */
 
+package Boundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.EventListener;
 import java.awt.event.MouseListener;
+
+import Control.SkillsControl;
  
 public class SkillsFrame extends JFrame {
  
@@ -23,9 +26,15 @@ public class SkillsFrame extends JFrame {
     
     SkillsControl skillsControl;
 
-    public void init(String title){
-    skillsControl = new SkillsControl("jp2020213326");
-    jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,skillsControl.skillslist.size());
+    public SkillsFrame(String ID){
+        this.init("MySkills",ID);
+        this.setResizable(false);
+        this.setVisible(true);
+    }
+
+    public void init(String title, String ID){
+        skillsControl = new SkillsControl(ID);
+        jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,skillsControl.skillslist.size());
         setTitle(title);
         setBounds(100, 100, 400, 500);
         setLayout(new FlowLayout(FlowLayout.CENTER,400,50));

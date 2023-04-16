@@ -1,20 +1,25 @@
+package Boundary;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import Control.CourseControl;
 
 public class CourseFrame extends JFrame {
     JPanel       p1 = new JPanel();
     JPanel       p2 = new JPanel();
     JPanel       p3 = new JPanel();
     JProgressBar jProgressBar;
-    JComboBox    c1 = new JComboBox();
-    JComboBox    c2 = new JComboBox();
+    JComboBox<String>    c1 = new JComboBox<String>();
+    JComboBox<String>    c2 = new JComboBox<String>();
 
     CourseControl control;
+
+    public CourseFrame(){
+        this.init("MyCourses");
+        this.setVisible(true);
+    }
 
     public void init(String title){
         control = new CourseControl();
@@ -136,33 +141,23 @@ public class CourseFrame extends JFrame {
     public void setJProgressBar(){
         jProgressBar.setStringPainted(true);
         jProgressBar.setFont(new Font("Arial", Font.PLAIN, 18));
-        //try {
-            //JProgressBar.setValue(this.progressBarValue());
+        jProgressBar.setValue(completedCourse());
+    }
 
-            jProgressBar.setValue(2);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public int completedCourse(){
+        int num = 0;
+        for(int i=0;i<this.control.course1.size();i++){
+            if(this.control.course1.get(i).getCompleted()==true){
+                num++;
+            }
         }
-    }
-
-    public int progressBarValue() throws IOException {
-        int value = 0;
-
-        FileReader fileReader = new FileReader("course1.txt");
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        while(bufferedReader.readLine() != null){
-            value ++;
-        }
-
-        return value;
+        return num;
     }
 
 
-
-
-    public static void main(String[] args) {
-        CourseFrame test = new CourseFrame();
-        test.init("hi");
-        test.setVisible(true);
-    }
+    // public static void main(String[] args) {
+    //     CourseFrame test = new CourseFrame();
+    //     test.init("");
+    //     test.setVisible(true);
+    // }
 }

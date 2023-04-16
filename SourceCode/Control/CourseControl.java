@@ -1,7 +1,10 @@
-package Entity;
+package Control;
+
 import java.util.ArrayList;
 import java.io.*;
       
+import Entity.Course;
+
 public class CourseControl{
 
     public ArrayList<Course> course1 = new ArrayList<Course>();  //主函数
