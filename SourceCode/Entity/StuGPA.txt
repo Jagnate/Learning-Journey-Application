@@ -1,2 +1,0 @@
-stuID index GPA
-jp2020213326 1 90
