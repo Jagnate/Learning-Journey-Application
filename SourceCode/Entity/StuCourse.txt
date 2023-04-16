@@ -1,2 +1,2 @@
-stuID index
-jp2020213326 1.3
+stuID courseIndex skillIndex
+jp2020213326 1_3 1_2_3
