@@ -1,4 +1,0 @@
-index skillName CoursesRequired
-1 MathSkill 1_2_3
-2 EnglishSkill 1_3
-3 CodingSkill 1
