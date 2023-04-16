@@ -1,5 +1,4 @@
 index skillName CoursesRequired
-
 1 MathSkill 1_2_7
 2 CodingSkill 4_12_15_18_20_21
 3 PhysicsSkill 3_11
