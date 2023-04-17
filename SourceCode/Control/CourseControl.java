@@ -1,74 +1,36 @@
-package Control;
-
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.io.*;
       
-import Entity.Course;
 
 public class CourseControl{
 
-    public ArrayList<Course> course1 = new ArrayList<Course>();  //主函数
-    Course course2 = new Course();
+    public ArrayList<Course>  courselist  = new ArrayList<Course>();  //主函数
+    public ArrayList<Integer> courseIndex = new ArrayList<Integer>();
 
-    public void readInfo(String ID, int year){
+    public CourseControl(String ID, int year){
+        this.readCourses(ID);
+        this.readGeneralInfo();
+        this.readPersonInfo(ID,year);
+    }
 
+    public void readCourses(String ID){
         try{
-
-            FileReader     fileReader     = new FileReader("Courses.txt");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String         oneline        = bufferedReader.readLine();
-
-            //Read a line one by one
-            while(oneline!=null){
-
-                String[] oneInfo = oneline.split(" ");
-
-                course2.setIndex(Integer.parseInt(oneInfo[0]));
-                course2.setCourseName(oneInfo[1]);
-                course2.setCredit(Integer.parseInt(oneInfo[2]));
-                course2.setCourseType(Boolean.valueOf(oneInfo[3]));
-                course2.setYear(Integer.parseInt(oneInfo[4]));
-
-                String[] oneInfo2 = oneInfo[5].split(".");
-                int len = oneInfo2.length;
-                for (int i = 0; i < len; i++) {
-                    course2.skillList.add(Integer.parseInt(oneInfo2[i]));
-                }
-                course1.add(course2);
-                oneline = bufferedReader.readLine();
-            }
-
-            fileReader.close();
-            bufferedReader.close();
-
-        }catch(IOException e){
-            //To be updated with UI
-            System.err.println(e);
-            System.exit(-1);
-        }
-
-        
-        try{
-
             FileReader     fileReader     = new FileReader("StuCourse.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
-
+            oneline = bufferedReader.readLine();
             //Read a line one by one
             while(oneline!=null){
-
                 String[] oneInfo = oneline.split(" ");
-
                 if(oneInfo[0].equals(ID)){
-                    String[] oneInfo2 = oneInfo[1].split(".");
-                    int len = oneInfo2.length;
-                    for (int i = 0; i < len; i++) {
-                             course1.get(Integer.parseInt(oneInfo2[i])).setTolearn(true);
+                    String[] courseTolearn = oneInfo[1].split("_");
+                    for (int i = 0; i < courseTolearn.length; i++) {
+                        courseIndex.add(Integer.parseInt(courseTolearn[i]));
                     }
                 }
                 oneline = bufferedReader.readLine();
             }
-
             fileReader.close();
             bufferedReader.close();
 
@@ -77,26 +39,81 @@ public class CourseControl{
             System.err.println(e);
             System.exit(-1);
         }
+    }
 
+    public void readGeneralInfo(){
         try{
+            FileReader     fileReader     = new FileReader("Courses.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String         oneline        = bufferedReader.readLine();
+            oneline = bufferedReader.readLine();
+            int sum = 0;
+            //Read a line one by one
+            while(oneline!=null){
+                if(sum==courseIndex.size()){
+                    break;
+                }
+                String[] oneInfo = oneline.split(" ");
+                if(courseIndex.get(sum)==Integer.parseInt(oneInfo[0])){
+                    sum++;
+                    Course tempCourse = new Course();
+                    tempCourse.setIndex(Integer.parseInt(oneInfo[0]));
+                    tempCourse.setCourseName(oneInfo[1]);
+                    tempCourse.setCredit(Integer.parseInt(oneInfo[2]));
+                    if(oneInfo[3].equals("Compulsory")){
+                        tempCourse.setCourseType(true);
+                    }
+                    else{
+                        tempCourse.setCourseType(false);
+                    }
+                    tempCourse.setYear(Integer.parseInt(oneInfo[4]));
+                    this.courselist.add(tempCourse);
+                }
+                oneline = bufferedReader.readLine();
+            }
+            fileReader.close();
+            bufferedReader.close();
 
+        }catch(IOException e){
+            //To be updated with UI
+            System.err.println(e);
+            System.exit(-1);
+        }
+    }
+
+    public void readPersonInfo(String ID, int year){
+        try{
             FileReader     fileReader     = new FileReader("StuGPA.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
-
+            oneline = bufferedReader.readLine();
             //Read a line one by one
             while(oneline!=null){
-
                 String[] oneInfo = oneline.split(" ");
-
                 if(oneInfo[0].equals(ID)){
-                    course1.get(Integer.parseInt(oneInfo[1])).setGPA(Integer.parseInt(oneInfo[2]));
-                    course1.get(Integer.parseInt(oneInfo[1])).setCompleted(true);
-                    if(Integer.parseInt(oneInfo[2])<60){
-                        course1.get(Integer.parseInt(oneInfo[1])).setPass(false);
-                    }
-                    else{
-                        course1.get(Integer.parseInt(oneInfo[1])).setPass(true);
+                    for(int i=0;i<courseIndex.size();i++){
+                        if(courseIndex.get(i)==Integer.parseInt(oneInfo[1])){
+                            for(int j=0;j<courselist.size();j++){
+                                //System.out.println(courselist.get(j).getIndex());
+                                //System.out.println(courseIndex.get(i));
+                                if(courselist.get(j).getIndex()==courseIndex.get(i)){
+                                    courselist.get(j).setGPA(Integer.parseInt(oneInfo[2]));
+                                    if(Integer.parseInt(oneInfo[2])<60){
+                                        courselist.get(j).setPass(false);
+                                    }else{
+                                        courselist.get(j).setPass(true);
+                                    }
+                                    Calendar date = Calendar.getInstance();
+                                    if(date.get(Calendar.YEAR)-year>=courselist.get(j).getYear()){
+                                        courselist.get(j).setCompleted(true);
+                                    }else{
+                                        courselist.get(j).setCompleted(false);
+                                    }
+                                    break;
+                                }
+                            }
+                            break;
+                        }
                     }
                 }
                 oneline = bufferedReader.readLine();
@@ -104,28 +121,21 @@ public class CourseControl{
 
             fileReader.close();
             bufferedReader.close();
-            
+
         }catch(IOException e){
             //To be updated with UI
             System.err.println(e);
             System.exit(-1);
         }
-        
-        for (Course i : course1) {
-            if(i.getYear()<year-2020 && i.getTolearn()==true){
-                i.setCompleted(false);
-            }
-            if(i.getYear()>=year-2020 && i.getTolearn()==true){
-                i.setCompleted(true);
-            }
-        }
-
     }
 
     public static void main(String[] args) {
-        CourseControl test = new CourseControl();
-       test.readInfo("aaaa",2022);
+        CourseControl test = new CourseControl("jp2020213304",2020);
+        for(int i=0;i<test.courselist.size();i++){
+            System.out.println(test.courselist.get(i).getCourseName());
+            System.out.println(test.courselist.get(i).getPass());
+            System.out.println(test.courselist.get(i).getCompleted());
+        }
+            
     }
-
-
 }
