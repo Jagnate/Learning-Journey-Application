@@ -1,6 +1,8 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
-import java.awt.event.MouseAdapter;
+import java.awt.event.*;
 
 //import Control.CourseControl;
 
@@ -11,7 +13,11 @@ public class CourseFrame extends JFrame {
     JProgressBar jProgressBar;
     JComboBox<String> comboBox1 = new JComboBox<String>();
     JComboBox<String> comboBox2 = new JComboBox<String>();
+    String[] tableHeader = {"Course","year","Type","Credit","GPA"};
+    String[][] info;
+
     private JTable jTable;
+    private int[] filter = {-1,-1};  
 
     CourseControl control;
 
@@ -35,8 +41,8 @@ public class CourseFrame extends JFrame {
         container.add(filterSelect,BorderLayout.NORTH);
         container.add(putTable,BorderLayout.CENTER);
         container.add(showPercentage,BorderLayout.SOUTH);
-        this.loadTalbe();
         setTable();
+        this.loadTable();
     }
 
     public void setP1(){
@@ -44,49 +50,43 @@ public class CourseFrame extends JFrame {
         comboBox1.addItem("Completed");
         comboBox1.addItem("Uncompleted");
         comboBox1.setBounds(0,0,200,40);
+        comboBox1.setSelectedIndex(0);
         filterSelect.add(comboBox1);
-        comboBox2.addItem("All courses");
-        comboBox2.addItem("Required Course");
-        comboBox2.addItem("Optional Course");
+        comboBox2.addItem("All Courses");
+        comboBox2.addItem("Compulsory");
+        comboBox2.addItem("Optional");
         comboBox2.setBounds(200,0,200,40);
+        comboBox2.setSelectedIndex(0);
         filterSelect.add(comboBox2);
-//        filterSelect.setLayout(null);
-        comboBox1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                // Get the selected item from the first JComboBox
-                String selectedItem = (String) comboBox1.getSelectedItem();
 
-                // Generate the appropriate table based on the selected item
-                if (selectedItem.equals("Completed"))
-                {
-                    Boolean flag = true;
-                    circlec1(flag);
+        comboBox1.addItemListener(new ItemListener(){
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(comboBox1.getSelectedItem().equals("Completed")){
+                    filter[0]=0;
+                }else if(comboBox1.getSelectedItem().equals("Uncompleted")){
+                    filter[0]=1;
+                }else{
+                    filter[0]=-1;
                 }
-                else if (selectedItem.equals("Uncompleted")) {
-                    Boolean flag = false;
-                    circlec1(flag);
-                }
+                loadTable();
+                refresh();
             }
         });
-
-        comboBox2.addMouseListener(new MouseAdapter() {
+        
+        comboBox2.addItemListener(new ItemListener(){
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                // Get the selected item from the first JComboBox
-                String selectedItem = (String) comboBox1.getSelectedItem();
-
-                // Generate the appropriate table based on the selected item
-                if (selectedItem.equals("Required Course"))
-                {
-                    Boolean flag = true;
-                    circlec2(flag);
-
+            public void itemStateChanged(ItemEvent e) {
+                if(comboBox2.getSelectedItem().equals("Compulsory")){
+                    filter[1]=0;
+                }else if(comboBox2.getSelectedItem().equals("Optional")){
+                    filter[1]=1;
+                }else{
+                    filter[1]=-1;
                 }
-                else if (selectedItem.equals("Optional Course")) {
-                    Boolean flag = false;
-                    circlec2(flag);
-                }
+                loadTable();
+                refresh();
+                System.out.println("!!");
             }
         });
     }
@@ -114,85 +114,94 @@ public class CourseFrame extends JFrame {
     }
 
     //filter: 0 all; 1 
-    public void loadTalbe(){
+    public void loadTable(){
+        int j=0;
         for(int i=1;i<control.courselist.size()+1;i++){
-            jTable.setValueAt(control.courselist.get(i-1).getCourseName(), i, 0);
-            jTable.setValueAt(control.courselist.get(i-1).getYear(), i, 1);
-            jTable.setValueAt(control.courselist.get(i-1).getCourseType(), i, 2);
-            jTable.setValueAt(control.courselist.get(i-1).getCredit(), i, 3);
-            jTable.setValueAt(control.courselist.get(i-1).getGPA(), i, 4);
-        }
-        putTable.add(jTable);
-    }
-
-    public void circlec1(boolean flag){
-        putTable.remove(jTable);
-        String CourseType = "null";
-        int i=1;
-        for(int m=0;m<22;m++)
-        {
-            if (control.courselist.get(m).getCompleted() == flag)
-            {
-                String courseName = control.courselist.get(m).getCourseName();
-                int year = control.courselist.get(m).getYear();
-                boolean type = control.courselist.get(m).getCourseType();
-                int credit = control.courselist.get(m).getCredit();
-                int GPA = control.courselist.get(m).getGPA();
-                if(type) {
-                    CourseType = "Compulsory";
+            if(filter[0]==-1&filter[1]==0){
+                if(!control.courselist.get(i-1).getCourseType()){
+                    i++;
+                    j--;
                 }
-                else {
-                    CourseType = "Optional";
+            }else if(filter[0]==-1&filter[1]==1){
+                if(control.courselist.get(i-1).getCourseType()){
+                    i++;
+                    j--;
                 }
-                jTable.setValueAt(courseName, i, 0);
-                jTable.setValueAt(year, i, 1);
-                jTable.setValueAt(CourseType, i, 2);
-                jTable.setValueAt(credit, i, 3);
-                jTable.setValueAt(GPA, i, 4);
-                i++;
+            }else if(filter[0]==0&filter[1]==-1){
+                if(!control.courselist.get(i-1).getCompleted()){
+                    i++;
+                    j--;
+                }
+            }else if(filter[0]==0&filter[1]==0){
+                if(!control.courselist.get(i-1).getCourseType()||!control.courselist.get(i-1).getCompleted()){
+                    i++;
+                    j--;
+                }
+            }else if(filter[0]==0&filter[1]==1){
+                if(!control.courselist.get(i-1).getCourseType()||control.courselist.get(i-1).getCompleted()){
+                    i++;
+                    j--;
+                }
+            }else if(filter[0]==1&filter[1]==-1){
+                if(control.courselist.get(i-1).getCourseType()){
+                    i++;
+                    j--;
+                }
+            }else if(filter[0]==1&filter[1]==0){
+                if(control.courselist.get(i-1).getCourseType()||!control.courselist.get(i-1).getCompleted()){
+                    i++;
+                    j--;
+                }
+            }else if(filter[0]==1&filter[1]==1){
+                if(control.courselist.get(i-1).getCourseType()||control.courselist.get(i-1).getCompleted()){
+                    i++;
+                    j--;
+                }
+            }else if(filter[0]==-1&filter[1]==-1){
+                jTable.setValueAt(control.courselist.get(i-1).getCourseName(), i, 0);
+                jTable.setValueAt(control.courselist.get(i-1).getYear(), i, 1);
+                jTable.setValueAt(convert(control.courselist.get(i-1).getCourseType()), i, 2);
+                jTable.setValueAt(control.courselist.get(i-1).getCredit(), i, 3);
+                jTable.setValueAt(control.courselist.get(i-1).getGPA(), i, 4);
             }
+            j++;
+            infoDefine(j, i);
+            System.out.println(i);
         }
-        putTable.add(jTable);
     }
 
-     public void circlec2(boolean flag){
-         putTable.remove(jTable);
-         String CourseType = "null";
-         int i=0;
-         for(int m=0;m<22;m++)
-         {
-             if (control.courselist.get(m).getCourseType() == flag)
-             {
-                 String courseName = control.courselist.get(m).getCourseName();
-                 int year = control.courselist.get(m).getYear();
-                 boolean type = control.courselist.get(m).getCourseType();
-                 int credit = control.courselist.get(m).getCredit();
-                 int GPA = control.courselist.get(m).getGPA();
-                 jTable.setValueAt(courseName, i, 0);
-                 jTable.setValueAt(year, i, 1);
-                 if(type) {
-                     CourseType = "Compulsory";
-                 }
-                 else {
-                     CourseType = "Optional";
-                 }
-                 jTable.setValueAt(CourseType, i, 2);
-                 jTable.setValueAt(credit, i, 3);
-                 jTable.setValueAt(GPA, i, 4);
-                 i++;
-             }
-             m++;
-         }
-         putTable.add(jTable);
-     }
+    public void infoDefine(int j,int i){
+        info = new String[control.courselist.size()+1][5];
+        info[j][0]=control.courselist.get(i-1).getCourseName();
+        info[j][1]=Integer.toString(control.courselist.get(i-1).getYear());
+        info[j][2]=convert(control.courselist.get(i-1).getCourseType());
+        info[j][3]=Integer.toString(control.courselist.get(i-1).getCredit());
+        info[j][4]=Integer.toString(control.courselist.get(i-1).getGPA());
+    }
 
+    public String convert(Boolean type){
+        String res;
+        if(type){
+            res = "Compulsory";
+        }else{
+            res = "Optional";
+        }
+        return res;
+    }
+
+    public void refresh(){
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        model.setDataVector(info, tableHeader);
+        jTable.updateUI();
+    }
 
     public void setTable()
     {
-        this.jTable.setValueAt("courseName", 0, 0);
-        this.jTable.setValueAt("year", 0, 1);
-        this.jTable.setValueAt("CourseType", 0, 2);
-        this.jTable.setValueAt("credit", 0, 3);
+        this.jTable.setValueAt("Course", 0, 0);
+        this.jTable.setValueAt("Year", 0, 1);
+        this.jTable.setValueAt("Type", 0, 2);
+        this.jTable.setValueAt("Credit", 0, 3);
         this.jTable.setValueAt("GPA", 0, 4);
+        putTable.add(jTable);
     }
 }
