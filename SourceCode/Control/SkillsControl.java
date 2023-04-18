@@ -24,7 +24,6 @@ public class SkillsControl {
     public void readtoLearnSkills(String ID){
         try{
             FileReader     fileReader     = new FileReader("./Entity/StuCourse.txt");
-            //FileReader     fileReader     = new FileReader("StuCourse.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             //Read a line one by one
@@ -121,12 +120,10 @@ public class SkillsControl {
                     flag[CourseLearnedList.get(j)-1] = 1;
                 }
         for(int i=0;i<skillslist.size();i++){
-            
             if(skillslist.get(i).courseList.size()>CourseLearnedList.size()){
                 skillslist.get(i).setAccquired(false);
                 continue;
             }else{
-                
                 for(int k=0;k<skillslist.get(i).courseList.size();k++){
                     skillslist.get(i).setAccquired(true);
                     if(flag[skillslist.get(i).courseList.get(k)-1]!=1){
@@ -135,7 +132,6 @@ public class SkillsControl {
                     }
                 }
             }
-        }
-        
+        } 
     }
 }

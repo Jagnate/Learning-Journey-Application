@@ -20,11 +20,9 @@ public class MainControl {
 
     public void readInfo(){
         try{
-
             FileReader     fileReader     = new FileReader("./Entity/"+Student.database);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
-
             //Read a line one by one
             while(oneline!=null){
                 //Data format: StuID  StuName    StudentBirth StuMajor   StuSchool  StuYear
@@ -40,10 +38,8 @@ public class MainControl {
                 }
                 oneline = bufferedReader.readLine();
             }
-
             fileReader.close();
             bufferedReader.close();
-
         }catch(IOException e){
             //To be updated with UI
             System.err.println(e);

@@ -26,35 +26,36 @@ public class LoginFrame extends JFrame
     private JPanel            contentPanel = new JPanel();
     // private JPanel         contentPanel = new MyDrawPanel();
     
-    private JButton           login = new JButton("Log In");
-    private JButton           hint = new JButton();
-    private GradientTextPanel title = new GradientTextPanel();
+    private JButton           login        = new JButton("I'm ready!");
+    private JButton           hint         = new JButton();
+    private GradientTextPanel title        = new GradientTextPanel();
     // private JLabel title = new JLabel("Log In");
-    private JLabel            accHint = new JLabel("Account ID:");
-    private URL               urlAcc = LoginFrame.class.getResource("iconAcc.png");
-    private Icon              iconAcc = new ImageIcon(urlAcc); 
-    private Image             imgAcc = ((ImageIcon)iconAcc).getImage();
-    private int               widthAcc = imgAcc.getWidth(null);
-    private int               heightAcc = imgAcc.getWidth(null);
-    private BufferedImage     tagAcc = new BufferedImage((int)(0.01 * widthAcc), (int)(0.01 * heightAcc),BufferedImage.TYPE_INT_RGB);
-	private Icon              newIconAcc = new ImageIcon(tagAcc);
 
-    private JLabel            pswHint = new JLabel("Password:");
-    private URL               urlPsw = LoginFrame.class.getResource("iconPsw.png");
-    private Icon              iconPsw = new ImageIcon(urlPsw); 
-    private Image             imgPsw = ((ImageIcon)iconPsw).getImage();
-    private int               widthPsw = imgPsw.getWidth(null);
-    private int               heightPsw = imgPsw.getWidth(null);
-    private BufferedImage     tagPsw = new BufferedImage((int)(0.015 * widthPsw), (int)(0.015 * heightPsw),BufferedImage.TYPE_INT_RGB);
-	private Icon              newIconPsw = new ImageIcon(tagPsw);
+    private JLabel            accHint      = new JLabel("Student ID:");
+    private URL               urlAcc       = LoginFrame.class.getResource("iconAcc.png");
+    private Icon              iconAcc      = new ImageIcon(urlAcc); 
+    private Image             imgAcc       = ((ImageIcon)iconAcc).getImage();
+    private int               widthAcc     = imgAcc.getWidth(null);
+    private int               heightAcc    = imgAcc.getWidth(null);
+    private BufferedImage     tagAcc       = new BufferedImage((int)(0.01 * widthAcc), (int)(0.01 * heightAcc),BufferedImage.TYPE_INT_RGB);
+	private Icon              newIconAcc   = new ImageIcon(tagAcc);
 
-    private JLabel            forgetHint = new JLabel("Forget your password?", SwingConstants.CENTER);
-    private JTextField        accNum = new JTextField();
-    private JTextField        psw = new JTextField();
+    private JLabel            pswHint      = new JLabel("Password:");
+    private URL               urlPsw       = LoginFrame.class.getResource("iconPsw.png");
+    private Icon              iconPsw      = new ImageIcon(urlPsw); 
+    private Image             imgPsw       = ((ImageIcon)iconPsw).getImage();
+    private int               widthPsw     = imgPsw.getWidth(null);
+    private int               heightPsw    = imgPsw.getWidth(null);
+    private BufferedImage     tagPsw       = new BufferedImage((int)(0.015 * widthPsw), (int)(0.015 * heightPsw),BufferedImage.TYPE_INT_RGB);
+	private Icon              newIconPsw   = new ImageIcon(tagPsw);
+
+    private JLabel            forgetHint   = new JLabel("Forget your password?", SwingConstants.CENTER);
+    private JTextField        accNum       = new JTextField();
+    private JTextField        psw          = new JTextField();
 
     private MainFrame mainFrame;
 
-    private LoginControl logincontrol = new LoginControl();
+    private LoginControl logincontrol      = new LoginControl();
 
     /**
      * This is the constructor of the class.
@@ -62,7 +63,6 @@ public class LoginFrame extends JFrame
     public LoginFrame(){
         this.init();
         this.addListener();
-        
     }
 
     /**
@@ -74,6 +74,7 @@ public class LoginFrame extends JFrame
         this.setPsw();
         this.setLogin();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
     }
 
     // /**
@@ -99,7 +100,7 @@ public class LoginFrame extends JFrame
         add(forgetHint);
         add(login);
         add(hint);
-        title.setBounds(110, 10, 150, 100);
+        title.setBounds(25, 10, 310, 200);
         contentPanel.setOpaque(false);
 		getContentPane().add(contentPanel);
 	}
@@ -164,27 +165,18 @@ public class LoginFrame extends JFrame
     public void loginControl(){
         String tempID = logincontrol.checkID(accNum.getText(),psw.getText());
         if(tempID.equals("1")){
-            JOptionPane.showMessageDialog(null, "wrong password!");
+            JOptionPane.showMessageDialog(null, "Wrong password!");
         }
         else  if(tempID.equals("-1")){
-            JOptionPane.showMessageDialog(null, "Not Found StudentID!");
+            JOptionPane.showMessageDialog(null, "Opps, not Found StudentID!");
         }
         else{
             mainFrame = new MainFrame();
             mainFrame.control.stu.setID(tempID);
             mainFrame.showInfo();
-            JOptionPane.showMessageDialog(null, "Successfully!");
+            JOptionPane.showMessageDialog(null, "Welcome! "+mainFrame.control.stu.getName()+"!");
             mainFrame.setVisible(true);
             this.dispose();
         }
     }
-
-
-
-    // public static void main(String[] args){
-    //     LoginFrame myFrame = new LoginFrame();
-    //     myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //     myFrame.setVisible(true);
-    // }
-
 }

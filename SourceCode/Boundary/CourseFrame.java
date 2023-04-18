@@ -1,42 +1,43 @@
 package Boundary;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 import java.awt.*;
-import java.awt.event.*;
+//import java.awt.event.*;
 
 import Control.CourseControl;
 
 public class CourseFrame extends JFrame {
-    JPanel       filterSelect = new JPanel();
-    JPanel       putTable = new JPanel();
-    JPanel       showPercentage = new JPanel();
-    JProgressBar jProgressBar;
-    JComboBox<String> comboBox1 = new JComboBox<String>();
-    JComboBox<String> comboBox2 = new JComboBox<String>();
-    String[] tableHeader = {"Course","year","Type","Credit","GPA"};
-    String[][] info;
+    private JPanel            filterSelect   = new JPanel();
+    private JPanel            putTable       = new JPanel();
+    private JPanel            showPercentage = new JPanel();
+    private JProgressBar      jProgressBar;
+    private JComboBox<String> comboBox1      = new JComboBox<String>();
+    private JComboBox<String> comboBox2      = new JComboBox<String>();
+    private String[]          tableHeader    = {"Course","year","Type","Credit","GPA"};
+    private String[][]        info;
 
     private JTable jTable;
     private int[] filter = {-1,-1};  
 
-    CourseControl control;
+    private CourseControl control;
 
     public CourseFrame(String ID,int year){
         control = new CourseControl(ID, year);
         jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,control.courselist.size());
         this.init();
         this.setVisible(true);
+        this.setResizable(false);
     }
     
 
     public void init(){
         jTable = new JTable(20,5);
         setTitle("MyCourses");
-        setBounds(100, 100, 400, 500);
+        setBounds(100, 100, 450, 500);
         setP1();
-        setP3();
+        setP2();
         setJProgressBar();
         Container container = getContentPane();
         setLayout(new BorderLayout(30,100));
@@ -49,50 +50,50 @@ public class CourseFrame extends JFrame {
 
     public void setP1(){
         comboBox1.addItem("All Courses");
-        comboBox1.addItem("Completed");
-        comboBox1.addItem("Uncompleted");
+        //comboBox1.addItem("Completed");
+        //comboBox1.addItem("Uncompleted");
         comboBox1.setBounds(0,0,200,40);
         comboBox1.setSelectedIndex(0);
         filterSelect.add(comboBox1);
         comboBox2.addItem("All Courses");
-        comboBox2.addItem("Compulsory");
-        comboBox2.addItem("Optional");
+        //comboBox2.addItem("Compulsory");
+        //comboBox2.addItem("Optional");
         comboBox2.setBounds(200,0,200,40);
         comboBox2.setSelectedIndex(0);
         filterSelect.add(comboBox2);
 
-        comboBox1.addItemListener(new ItemListener(){
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if(comboBox1.getSelectedItem().equals("Completed")){
-                    filter[0]=0;
-                }else if(comboBox1.getSelectedItem().equals("Uncompleted")){
-                    filter[0]=1;
-                }else{
-                    filter[0]=-1;
-                }
-                loadTable();
-                refresh();
-            }
-        });
+        // comboBox1.addItemListener(new ItemListener(){
+        //     @Override
+        //     public void itemStateChanged(ItemEvent e) {
+        //         if(comboBox1.getSelectedItem().equals("Completed")){
+        //             filter[0]=0;
+        //         }else if(comboBox1.getSelectedItem().equals("Uncompleted")){
+        //             filter[0]=1;
+        //         }else{
+        //             filter[0]=-1;
+        //         }
+        //         loadTable();
+        //         refresh();
+        //     }
+        // });
         
-        comboBox2.addItemListener(new ItemListener(){
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if(comboBox2.getSelectedItem().equals("Compulsory")){
-                    filter[1]=0;
-                }else if(comboBox2.getSelectedItem().equals("Optional")){
-                    filter[1]=1;
-                }else{
-                    filter[1]=-1;
-                }
-                loadTable();
-                refresh();
-                //System.out.println("!!");
-            }
-        });
+        // comboBox2.addItemListener(new ItemListener(){
+        //     @Override
+        //     public void itemStateChanged(ItemEvent e) {
+        //         if(comboBox2.getSelectedItem().equals("Compulsory")){
+        //             filter[1]=0;
+        //         }else if(comboBox2.getSelectedItem().equals("Optional")){
+        //             filter[1]=1;
+        //         }else{
+        //             filter[1]=-1;
+        //         }
+        //         loadTable();
+        //         refresh();
+        //         //System.out.println("!!");
+        //     }
+        // });
     }
-    public void setP3() {
+    public void setP2() {
         JLabel jLabel = new JLabel("Courses Progress: ");
         showPercentage.add(jLabel);
         showPercentage.add(jProgressBar);
@@ -198,13 +199,28 @@ public class CourseFrame extends JFrame {
         jTable.updateUI();
     }
 
+    public void setcolum(){
+        TableColumn column1 = jTable.getColumnModel().getColumn(0);
+        column1.setPreferredWidth(200);
+        TableColumn column2 = jTable.getColumnModel().getColumn(1);
+        column2.setPreferredWidth(40);
+        TableColumn column3 = jTable.getColumnModel().getColumn(2);
+        column3.setPreferredWidth(80);
+        TableColumn column4 = jTable.getColumnModel().getColumn(3);
+        column4.setPreferredWidth(40);
+        TableColumn column5 = jTable.getColumnModel().getColumn(4);
+        column5.setPreferredWidth(40);
+    }
+
     public void setTable()
     {
+        this.jTable.setEnabled(false);
+        this.setcolum();
         this.jTable.setValueAt("Course", 0, 0);
         this.jTable.setValueAt("Year", 0, 1);
         this.jTable.setValueAt("Type", 0, 2);
         this.jTable.setValueAt("Credit", 0, 3);
         this.jTable.setValueAt("GPA", 0, 4);
-        putTable.add(jTable);
+        this.putTable.add(jTable);
     }
 }

@@ -44,7 +44,6 @@ public class MainFrame extends JFrame{
         this.mainLayout();
         this.setSkilsFrame();
         this.setCourseFrame();
-        //this.setVisible(true);
     }
 
     private String judegYear(){
@@ -61,6 +60,7 @@ public class MainFrame extends JFrame{
     private void setFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300,400);
+        this.setResizable(false);
     }
 
     private void setMenu(){
