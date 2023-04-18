@@ -1,2 +1,2 @@
 StuID StuName StuBirth StuMajor StuSchool StuYear
-jp2020213326 JinSi 2002 Telecommunications BUPT&QMUL 2020
+jp2020213304 JinSi 2002 Telecommunications BUPT&QMUL 2020

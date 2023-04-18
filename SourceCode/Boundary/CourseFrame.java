@@ -1,10 +1,12 @@
+package Boundary;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
 
-//import Control.CourseControl;
+import Control.CourseControl;
 
 public class CourseFrame extends JFrame {
     JPanel       filterSelect = new JPanel();
@@ -21,17 +23,17 @@ public class CourseFrame extends JFrame {
 
     CourseControl control;
 
-    public CourseFrame(){
-        this.init("MyCourses");
+    public CourseFrame(String ID,int year){
+        control = new CourseControl(ID, year);
+        jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,control.courselist.size());
+        this.init();
         this.setVisible(true);
     }
     
 
-    public void init(String title){
-        control = new CourseControl("jp2020213304", 2020);
-        jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,control.courselist.size());
+    public void init(){
         jTable = new JTable(20,5);
-        setTitle(title);
+        setTitle("MyCourses");
         setBounds(100, 100, 400, 500);
         setP1();
         setP3();
@@ -86,7 +88,7 @@ public class CourseFrame extends JFrame {
                 }
                 loadTable();
                 refresh();
-                System.out.println("!!");
+                //System.out.println("!!");
             }
         });
     }
@@ -110,6 +112,7 @@ public class CourseFrame extends JFrame {
                 num++;
             }
         }
+        System.out.println(num);
         return num;
     }
 
@@ -166,7 +169,7 @@ public class CourseFrame extends JFrame {
             }
             j++;
             infoDefine(j, i);
-            System.out.println(i);
+            //System.out.println(i);
         }
     }
 

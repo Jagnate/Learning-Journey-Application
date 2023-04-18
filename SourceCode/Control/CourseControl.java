@@ -1,11 +1,15 @@
+package Control;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.io.*;
       
+import Entity.Course;
+
 
 public class CourseControl{
 
-    public ArrayList<Course>  courselist  = new ArrayList<Course>();  //主函数
+    public ArrayList<Course>  courselist  = new ArrayList<Course>();
     public ArrayList<Integer> courseIndex = new ArrayList<Integer>();
 
     public CourseControl(String ID, int year){
@@ -16,7 +20,7 @@ public class CourseControl{
 
     public void readCourses(String ID){
         try{
-            FileReader     fileReader     = new FileReader("StuCourse.txt");
+            FileReader     fileReader     = new FileReader("./Entity/StuCourse.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             oneline = bufferedReader.readLine();
@@ -43,7 +47,7 @@ public class CourseControl{
 
     public void readGeneralInfo(){
         try{
-            FileReader     fileReader     = new FileReader("Courses.txt");
+            FileReader     fileReader     = new FileReader("./Entity/Courses.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             oneline = bufferedReader.readLine();
@@ -83,7 +87,7 @@ public class CourseControl{
 
     public void readPersonInfo(String ID, int year){
         try{
-            FileReader     fileReader     = new FileReader("StuGPA.txt");
+            FileReader     fileReader     = new FileReader("./Entity/StuGPA.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             oneline = bufferedReader.readLine();
@@ -94,8 +98,6 @@ public class CourseControl{
                     for(int i=0;i<courseIndex.size();i++){
                         if(courseIndex.get(i)==Integer.parseInt(oneInfo[1])){
                             for(int j=0;j<courselist.size();j++){
-                                //System.out.println(courselist.get(j).getIndex());
-                                //System.out.println(courseIndex.get(i));
                                 if(courselist.get(j).getIndex()==courseIndex.get(i)){
                                     courselist.get(j).setGPA(Integer.parseInt(oneInfo[2]));
                                     if(Integer.parseInt(oneInfo[2])<60){
@@ -130,12 +132,11 @@ public class CourseControl{
     }
 
     public static void main(String[] args) {
-        CourseControl test = new CourseControl("jp2020213304",2020);
+        CourseControl test = new CourseControl("jp2020213304", 2020);
         for(int i=0;i<test.courselist.size();i++){
             System.out.println(test.courselist.get(i).getCourseName());
-            System.out.println(test.courselist.get(i).getPass());
             System.out.println(test.courselist.get(i).getCompleted());
         }
-            
+        
     }
 }

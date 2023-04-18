@@ -22,22 +22,28 @@ public class MainFrame extends JFrame{
     private JMenuBar    menuBar     = new JMenuBar();
     private JMenu       courseMenu  = new JMenu("Courses");
     private JMenu       skillsMenu  = new JMenu("Skills");
-    private JPanel      mainPalne   = new JPanel();
+    private JPanel      mainPlane   = new JPanel();
+    private JLabel      IDLabel     = new JLabel();
     private JLabel      nameLabel   = new JLabel();
     private JLabel      birthLabel  = new JLabel();
     private JLabel      majorLabel  = new JLabel();
     private JLabel      schoolLabel = new JLabel();
-    private JLabel      yearLabel   = new JLabel();  
+    private JLabel      yearLabel   = new JLabel();
+    private JLabel[]    infoTitle   = new JLabel[6];
 
     public MainControl  control     = new MainControl();
+
     private SkillsFrame skillsFrame;
+    private CourseFrame courseFrame;
 
     public MainFrame(){
         this.setTitle(judegYear());
+        this.setInfoTitle();
         this.setFrame();
         this.setMenu();
         this.mainLayout();
         this.setSkilsFrame();
+        this.setCourseFrame();
         //this.setVisible(true);
     }
 
@@ -54,20 +60,27 @@ public class MainFrame extends JFrame{
 
     private void setFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,700);
+        this.setSize(300,400);
     }
 
     private void setMenu(){
         menuBar.add(courseMenu);
         menuBar.add(skillsMenu);
-        // courseMenu.add(compItem);
-        // courseMenu.add(eleItem);
         this.setJMenuBar(menuBar);
+    }
+
+    public void setInfoTitle(){
+        String[] titleStrings = {"ID: ","Name: ","Birth: ","Major: ","Schoool: ","Year: "};
+        for(int i =0;i<6;i++){
+            infoTitle[i] = new JLabel();
+            infoTitle[i].setText(titleStrings[i]);
+        }
     }
 
     public void showInfo(){
         //Wait LoginControl to input the valid studentID
         control.readInfo();
+        IDLabel.setText(control.stu.getID());
         nameLabel.setText(control.stu.getName());
         birthLabel.setText(Integer.toString(control.stu.getBirth()));
         majorLabel.setText(control.stu.getMajor());
@@ -76,30 +89,46 @@ public class MainFrame extends JFrame{
     }
 
     private void mainLayout(){
-        this.add(mainPalne);
-        mainPalne.setLayout(null);
+        this.add(mainPlane);
+        mainPlane.setLayout(null);
 
         //showInfo();
-        nameLabel.setBounds(30, 20, 50, 50);
-        mainPalne.add(nameLabel);
+        IDLabel.setBounds(120, 20, 100, 50);
+        mainPlane.add(IDLabel);
 
-        birthLabel.setBounds(80, 20, 50, 50);
-        mainPalne.add(birthLabel);
+        nameLabel.setBounds(120, 60, 50, 50);
+        mainPlane.add(nameLabel);
 
-        majorLabel.setBounds(130, 20, 150, 50);
-        mainPalne.add(majorLabel);
+        birthLabel.setBounds(120, 100, 50, 50);
+        mainPlane.add(birthLabel);
 
-        schoolLabel.setBounds(280, 20, 100, 50);
-        mainPalne.add(schoolLabel);
+        majorLabel.setBounds(120, 140, 150, 50);
+        mainPlane.add(majorLabel);
 
-        yearLabel.setBounds(400, 20, 100, 50);
-        mainPalne.add(yearLabel);
+        schoolLabel.setBounds(120, 180, 100, 50);
+        mainPlane.add(schoolLabel);
+
+        yearLabel.setBounds(120, 220, 100, 50);
+        mainPlane.add(yearLabel);
+
+        for(int i=0;i<6;i++){
+            infoTitle[i].setBounds(30, 20+i*40, 70, 50);
+            mainPlane.add(infoTitle[i]);
+        }
     }
 
     private void setSkilsFrame(){
         skillsMenu.addMouseListener(new MouseAdapter(){
             public void mouseClicked(java.awt.event.MouseEvent e){        
                 skillsFrame = new SkillsFrame(control.stu.getID());
+            }
+        });
+    }
+
+    private void setCourseFrame(){
+        courseMenu.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent e){        
+                courseFrame = new CourseFrame(control.stu.getID(),control.stu.getYear());
             }
         });
     }

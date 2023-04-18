@@ -10,7 +10,7 @@ index  CourseName  Credit  CourseType  year  skills
 9 Enterprise_Management 2 Optional 2 8
 10 Digital_Signal_Processing 3 Compulsory 2 4
 11 Electric_and_Magnetic_Fields 4 Compulsory 2 3
-12 Internet_Protocols 3 Compulsory 2 Compulsory 3 2_7
+12 Internet_Protocols 3 Compulsory 3 2_7
 13 Digital_Circuit_and_Logic_Design 3 Compulsory 3 6_9
 14 Probability_Theory_and_Stochastic_Process 3 Compulsory 3 1
 15 Introductory_Java_Programming 3 Compulsory 3 2

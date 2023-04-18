@@ -45,7 +45,7 @@ public class Course {
     }
  
     public void setIndex(int Index) {
-        this.credit = Index;
+        this.Index = Index;
     }
 
     public int getGPA() {

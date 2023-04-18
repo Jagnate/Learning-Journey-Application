@@ -12,7 +12,6 @@
  *  @author Yilun Deng
  *  @author Yuanchi Zhou
  */
-
 package Control;
 
 import java.io.*;
