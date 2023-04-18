@@ -1,2 +1,0 @@
-StuID StuPassWord
-jp2020213326 1
