@@ -15,7 +15,7 @@ public class CourseFrame extends JFrame {
     private JProgressBar      jProgressBar;
     private JComboBox<String> comboBox1      = new JComboBox<String>();
     private JComboBox<String> comboBox2      = new JComboBox<String>();
-    private String[]          tableHeader    = {"Course","year","Type","Credit","GPA"};
+    //private String[]          tableHeader    = {"Course","year","Type","Credit","GPA"};
     private String[][]        info;
 
     private JTable jTable;
@@ -170,11 +170,10 @@ public class CourseFrame extends JFrame {
             }
             j++;
             infoDefine(j, i);
-            //System.out.println(i);
         }
     }
 
-    public void infoDefine(int j,int i){
+    private void infoDefine(int j,int i){
         info = new String[control.courselist.size()+1][5];
         info[j][0]=control.courselist.get(i-1).getCourseName();
         info[j][1]=Integer.toString(control.courselist.get(i-1).getYear());
@@ -183,7 +182,7 @@ public class CourseFrame extends JFrame {
         info[j][4]=Integer.toString(control.courselist.get(i-1).getGPA());
     }
 
-    public String convert(Boolean type){
+    private String convert(Boolean type){
         String res;
         if(type){
             res = "Compulsory";
@@ -193,13 +192,13 @@ public class CourseFrame extends JFrame {
         return res;
     }
 
-    public void refresh(){
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.setDataVector(info, tableHeader);
-        jTable.updateUI();
-    }
+    // private void refresh(){
+    //     DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+    //     model.setDataVector(info, tableHeader);
+    //     jTable.updateUI();
+    // }
 
-    public void setcolum(){
+    private void setcolum(){
         TableColumn column1 = jTable.getColumnModel().getColumn(0);
         column1.setPreferredWidth(200);
         TableColumn column2 = jTable.getColumnModel().getColumn(1);
@@ -212,7 +211,7 @@ public class CourseFrame extends JFrame {
         column5.setPreferredWidth(40);
     }
 
-    public void setTable()
+    private void setTable()
     {
         this.jTable.setEnabled(false);
         this.setcolum();

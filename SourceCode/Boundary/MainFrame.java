@@ -3,7 +3,7 @@
  *  Description: This class is the main interface of the learning journey application 
  *  which shows the basic information
  * 
- *  In this version, I set up the physical keyboard and 30 blocks for basic game style
+ *  In this version, I set up basic components.
  *  @author  Jin Si
  *  @version 1.0
  * 
