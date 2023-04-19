@@ -4,5 +4,5 @@
 This project is designed by Group 12.
 
 
-Contributer:
+🎯Contributer:
 Jin, Yilun, Yuanchi, Yuxuan, Dan.
