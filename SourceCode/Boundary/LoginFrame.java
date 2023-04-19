@@ -38,7 +38,7 @@ public class LoginFrame extends JFrame
     private int               widthAcc     = imgAcc.getWidth(null);
     private int               heightAcc    = imgAcc.getWidth(null);
     private BufferedImage     tagAcc       = new BufferedImage((int)(0.01 * widthAcc), (int)(0.01 * heightAcc),BufferedImage.TYPE_INT_RGB);
-	private Icon              newIconAcc   = new ImageIcon(tagAcc);
+    private Icon              newIconAcc   = new ImageIcon(tagAcc);
 
     private JLabel            pswHint      = new JLabel("Password:");
     private URL               urlPsw       = LoginFrame.class.getResource("iconPsw.png");
@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame
     private int               widthPsw     = imgPsw.getWidth(null);
     private int               heightPsw    = imgPsw.getWidth(null);
     private BufferedImage     tagPsw       = new BufferedImage((int)(0.015 * widthPsw), (int)(0.015 * heightPsw),BufferedImage.TYPE_INT_RGB);
-	private Icon              newIconPsw   = new ImageIcon(tagPsw);
+    private Icon              newIconPsw   = new ImageIcon(tagPsw);
 
     private JLabel            forgetHint   = new JLabel("Forget your password?", SwingConstants.CENTER);
     private JTextField        accNum       = new JTextField();
@@ -103,18 +103,18 @@ public class LoginFrame extends JFrame
         title.setBounds(25, 10, 310, 200);
         contentPanel.setOpaque(false);
 		getContentPane().add(contentPanel);
-	}
+    }
 
-	public void setAcc(){
+    public void setAcc(){
         accHint.setBounds(40, 130, 100, 25);
         accHint.setForeground(new Color(25,25,112));
         accHint.setIcon(newIconAcc);
 		tagAcc.getGraphics().drawImage(imgAcc, 0, 0, (int)(0.01 * widthAcc), (int)(0.01 * heightAcc), null); 
         accNum.setBounds(160, 130, 150, 25);
         accNum.setOpaque(true);
-	}
+    }
 
-	public void setPsw(){
+    public void setPsw(){
         pswHint.setBounds(40, 200, 100, 25);
         pswHint.setForeground(new Color(25,25,112));
         pswHint.setIcon(newIconPsw);
@@ -128,15 +128,15 @@ public class LoginFrame extends JFrame
         hint.setBackground(Color.blue);
         hint.setText("?");
         
-	}
+    }
 
-	public void setLogin(){
+    public void setLogin(){
         login.setOpaque(true);
         login.setBounds(75, 275, 200, 50);
         login.setBackground(new Color(200,200,221));
         login.setBorder(BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-	}
+    }
     /**
      * This method sets event listening.
      */
