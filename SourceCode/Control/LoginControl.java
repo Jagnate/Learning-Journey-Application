@@ -12,7 +12,6 @@
  *  @author Yilun Deng
  *  @author Yuanchi Zhou
  */
-
 package Control;
 
 import java.io.*;
@@ -24,11 +23,9 @@ public class LoginControl {
     public String checkID(String ID, String PassWord){
         String resStatus = "-1";
         try{
-            
             FileReader     fileReader     = new FileReader("./Entity/"+Student.userLog);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
-
             //Read a line one by one
             while(oneline!=null){
                 String[] oneInfo = oneline.split(" ");
@@ -46,13 +43,11 @@ public class LoginControl {
             }
             fileReader.close();
             bufferedReader.close();
-
         }catch(IOException e){
             //To be updated with UI
             System.err.println(e);
             System.exit(-1);
         }  
-
         return resStatus;
     }
 }

@@ -12,6 +12,8 @@ public class SkillsControl {
     public ArrayList<Integer>      CourseLearnedList  = new ArrayList<Integer>();
     public ArrayList<Integer>      toLearnSkillList   = new ArrayList<Integer>();
 
+    private int maxCourses;
+
     public SkillsControl(String ID){
         readtoLearnSkills(ID);
         readSkills();
@@ -22,7 +24,6 @@ public class SkillsControl {
     public void readtoLearnSkills(String ID){
         try{
             FileReader     fileReader     = new FileReader("./Entity/StuCourse.txt");
-            //FileReader     fileReader     = new FileReader("StuCourse.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String         oneline        = bufferedReader.readLine();
             //Read a line one by one
@@ -30,7 +31,9 @@ public class SkillsControl {
             while(oneline!=null){
                 String[] oneInfo = oneline.split(" ");
                 if(oneInfo[0].equals(ID)){
+                    String[] tempCourse = oneInfo[1].split("_");
                     String[] tempList = oneInfo[2].split("_");
+                    this.maxCourses = Integer.parseInt(tempCourse[tempCourse.length-1]);
                     for(int i=0;i<tempList.length;i++){
                         toLearnSkillList.add(Integer.parseInt(tempList[i]));
                     }
@@ -112,15 +115,15 @@ public class SkillsControl {
     }
 
     public void isAccquired(){
+        int[] flag = new int[maxCourses+1];
+        for(int j=0;j<CourseLearnedList.size();j++){
+                    flag[CourseLearnedList.get(j)-1] = 1;
+                }
         for(int i=0;i<skillslist.size();i++){
-            int[] flag = new int[skillslist.get(i).courseList.get(skillslist.get(i).courseList.size()-1)];
             if(skillslist.get(i).courseList.size()>CourseLearnedList.size()){
                 skillslist.get(i).setAccquired(false);
                 continue;
             }else{
-                for(int j=0;j<CourseLearnedList.size();j++){
-                    flag[CourseLearnedList.get(j)-1] = 1;
-                }
                 for(int k=0;k<skillslist.get(i).courseList.size();k++){
                     skillslist.get(i).setAccquired(true);
                     if(flag[skillslist.get(i).courseList.get(k)-1]!=1){
@@ -129,17 +132,6 @@ public class SkillsControl {
                     }
                 }
             }
-        }
-        
+        } 
     }
-
-    public static void main(String[] args) {
-        SkillsControl test = new SkillsControl("jp2020213326");
-        System.out.println(test.skillslist.get(0).getSkillName());
-        System.out.println(test.skillslist.get(0).getAccquired());
-        System.out.println(test.skillslist.get(1).getSkillName());
-        System.out.println(test.skillslist.get(1).getAccquired());
-
-    }
-
 }

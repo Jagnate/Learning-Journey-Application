@@ -8,23 +8,21 @@ package Boundary;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.EventListener;
-import java.awt.event.MouseListener;
 
 import Control.SkillsControl;
  
 public class SkillsFrame extends JFrame {
  
-    JCheckBox[]  check;
-    JPanel       p1 = new JPanel();
-    ScrollPane   scrollPane = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
-    JPanel       p2 = new JPanel();
-    JProgressBar jProgressBar;
-    int          value = 0;
+    private JCheckBox[]   check;
+    private JPanel        p1            = new JPanel();
+    private ScrollPane    scrollPane    = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
+    private JPanel        p2            = new JPanel();
+    private JProgressBar  jProgressBar;
+    private int           value         = 0;
     
-    SkillsControl skillsControl;
+    private SkillsControl skillsControl;
 
     public SkillsFrame(String ID){
         this.init("MySkills",ID);
@@ -45,17 +43,16 @@ public class SkillsFrame extends JFrame {
         scrollPane.add(p1);
         Container container = getContentPane();
         container.add(scrollPane);
-        // container.add(p1);
         container.add(p2);
     }
 
     public void addSkills(){
-        check = new JCheckBox[skillsControl.skillslist.size()];
-        boolean[]    isSelected = new boolean[skillsControl.skillslist.size()];
-        String[] text = new String[skillsControl.skillslist.size()];
+                  check      = new JCheckBox[skillsControl.skillslist.size()];
+        boolean[] isSelected = new boolean[skillsControl.skillslist.size()];
+        String[]  text       = new String[skillsControl.skillslist.size()];
         for(int j=0;j<skillsControl.skillslist.size();j++){
-        text[j] = skillsControl.skillslist.get(j).getSkillName();
-        isSelected[j] = skillsControl.skillslist.get(j).getAccquired();
+            text[j]       = skillsControl.skillslist.get(j).getSkillName();
+            isSelected[j] = skillsControl.skillslist.get(j).getAccquired();
         }
         for(int i=0; i<skillsControl.skillslist.size(); i++){
             if(isSelected[i]){
@@ -92,9 +89,9 @@ public class SkillsFrame extends JFrame {
     }
 
     public void setJProgressBar(){
-    boolean[]    tick = new boolean[skillsControl.skillslist.size()];
-        jProgressBar.setStringPainted(true);
-        jProgressBar.setFont(new Font("Arial", Font.PLAIN, 18));
+        boolean[] tick = new boolean[skillsControl.skillslist.size()];
+        this.jProgressBar.setStringPainted(true);
+        this.jProgressBar.setFont(new Font("Arial", Font.PLAIN, 18));
         new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
