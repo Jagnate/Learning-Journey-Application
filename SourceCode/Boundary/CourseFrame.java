@@ -113,7 +113,6 @@ public class CourseFrame extends JFrame {
                 num++;
             }
         }
-        System.out.println(num);
         return num;
     }
 
