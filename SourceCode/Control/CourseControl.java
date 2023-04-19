@@ -130,13 +130,4 @@ public class CourseControl{
             System.exit(-1);
         }
     }
-
-    public static void main(String[] args) {
-        CourseControl test = new CourseControl("jp2020213304", 2020);
-        for(int i=0;i<test.courselist.size();i++){
-            System.out.println(test.courselist.get(i).getCourseName());
-            System.out.println(test.courselist.get(i).getCompleted());
-        }
-        
-    }
 }
