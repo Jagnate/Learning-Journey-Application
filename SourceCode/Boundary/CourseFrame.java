@@ -1,27 +1,33 @@
-package Boundary;
+package boundary;
 
 import javax.swing.*;
 import javax.swing.table.*;
 
 import java.awt.*;
-//import java.awt.event.*;
+import java.awt.event.*;
 
-import Control.CourseControl;
+import control.CourseControl;
+import control.LineControl;
 
 public class CourseFrame extends JFrame {
-    private JPanel            filterSelect   = new JPanel();
+    private static final long serialVersionUID = 1L;
+	private JPanel            filterSelect   = new JPanel();
     private JPanel            putTable       = new JPanel();
     private JPanel            showPercentage = new JPanel();
     private JProgressBar      jProgressBar;
     private JComboBox<String> comboBox1      = new JComboBox<String>();
     private JComboBox<String> comboBox2      = new JComboBox<String>();
     //private String[]          tableHeader    = {"Course","year","Type","Credit","GPA"};
+    private ImageIcon iconRef = new ImageIcon("C:\\Users\\10487\\Desktop\\Learning_Journey_Application\\Learning_Journey_Application\\src\\boundary\\iconRef.png");
+    private JButton           refreshButton  = new JButton("Refresh");
+    private JButton           analysisButton = new JButton("Analysis");
     private String[][]        info;
 
     private JTable jTable;
     private int[] filter = {-1,-1};  
 
     private CourseControl control;
+    private LineControl line;
 
     public CourseFrame(String ID,int year){
         control = new CourseControl(ID, year);
@@ -45,53 +51,60 @@ public class CourseFrame extends JFrame {
         container.add(putTable,BorderLayout.CENTER);
         container.add(showPercentage,BorderLayout.SOUTH);
         setTable();
-        this.loadTable();
+        putTable.add(jTable);
     }
 
     public void setP1(){
         comboBox1.addItem("All Courses");
-        //comboBox1.addItem("Completed");
-        //comboBox1.addItem("Uncompleted");
+        comboBox1.addItem("Completed");
+        comboBox1.addItem("Uncompleted");
         comboBox1.setBounds(0,0,200,40);
         comboBox1.setSelectedIndex(0);
         filterSelect.add(comboBox1);
         comboBox2.addItem("All Courses");
-        //comboBox2.addItem("Compulsory");
-        //comboBox2.addItem("Optional");
+        comboBox2.addItem("Compulsory");
+        comboBox2.addItem("Optional");
         comboBox2.setBounds(200,0,200,40);
         comboBox2.setSelectedIndex(0);
         filterSelect.add(comboBox2);
+        //refreshButton.setIcon(iconRef);
+        //refreshButton.setPreferredSize(new Dimension(20, 20));
+        analysisButton.setBounds(300,0,40,40);
+        filterSelect.add(analysisButton);
+        refreshButton.setBounds(400,0,40,40);
+        filterSelect.add(refreshButton);
 
-        // comboBox1.addItemListener(new ItemListener(){
-        //     @Override
-        //     public void itemStateChanged(ItemEvent e) {
-        //         if(comboBox1.getSelectedItem().equals("Completed")){
-        //             filter[0]=0;
-        //         }else if(comboBox1.getSelectedItem().equals("Uncompleted")){
-        //             filter[0]=1;
-        //         }else{
-        //             filter[0]=-1;
-        //         }
-        //         loadTable();
-        //         refresh();
-        //     }
-        // });
-        
-        // comboBox2.addItemListener(new ItemListener(){
-        //     @Override
-        //     public void itemStateChanged(ItemEvent e) {
-        //         if(comboBox2.getSelectedItem().equals("Compulsory")){
-        //             filter[1]=0;
-        //         }else if(comboBox2.getSelectedItem().equals("Optional")){
-        //             filter[1]=1;
-        //         }else{
-        //             filter[1]=-1;
-        //         }
-        //         loadTable();
-        //         refresh();
-        //         //System.out.println("!!");
-        //     }
-        // });
+
+
+        refreshButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(comboBox1.getSelectedItem().equals("Completed")){
+                    filter[0]=0;
+                }else if(comboBox1.getSelectedItem().equals("Uncompleted")){
+                    filter[0]=1;
+                }else{
+                    filter[0]=-1;
+                }
+                if(comboBox2.getSelectedItem().equals("Compulsory")){
+                    filter[1]=0;
+                }else if(comboBox2.getSelectedItem().equals("Optional")){
+                    filter[1]=1;
+                }else{
+                    filter[1]=-1;
+                }
+                System.out.println(filter[0]+" "+filter[1]);
+                loadTable();
+
+            }
+        });
+
+        analysisButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                line.chart();
+            }
+        });
     }
     public void setP2() {
         JLabel jLabel = new JLabel("Courses Progress: ");
@@ -118,67 +131,69 @@ public class CourseFrame extends JFrame {
 
     //filter: 0 all; 1 
     public void loadTable(){
+        for(int m=0;m<control.courselist.size()+1;m++)
+        {
+            for(int n=0;n<5;n++)
+            {
+                jTable.setValueAt(null, m + 1, n);
+            }
+        }//清空
+        setTable();
         int j=0;
-        for(int i=1;i<control.courselist.size()+1;i++){
-            if(filter[0]==-1&filter[1]==0){
-                if(!control.courselist.get(i-1).getCourseType()){
-                    i++;
-                    j--;
+        for(int i=1;i<control.courselist.size()+1;i++)
+        {
+            if(filter[0]==-1&filter[1]==0)//所有必修
+            {
+                if(control.courselist.get(i-1).getCourseType()==true){
+                    j++;
+                    doTable(i,j);
                 }
-            }else if(filter[0]==-1&filter[1]==1){
-                if(control.courselist.get(i-1).getCourseType()){
-                    i++;
-                    j--;
+            }else if(filter[0]==-1&filter[1]==1)//所有选修
+            {
+                if(control.courselist.get(i-1).getCourseType()==false){
+                    j++;
+                    doTable(i,j);
                 }
             }else if(filter[0]==0&filter[1]==-1){
-                if(!control.courselist.get(i-1).getCompleted()){
-                    i++;
-                    j--;
+                if(control.courselist.get(i-1).getCompleted()==true){
+                    j++;
+                    doTable(i,j);
                 }
             }else if(filter[0]==0&filter[1]==0){
-                if(!control.courselist.get(i-1).getCourseType()||!control.courselist.get(i-1).getCompleted()){
-                    i++;
-                    j--;
+                if(control.courselist.get(i-1).getCourseType()==true&control.courselist.get(i-1).getCompleted()==true){
+                    j++;
+                    doTable(i,j);
                 }
             }else if(filter[0]==0&filter[1]==1){
-                if(!control.courselist.get(i-1).getCourseType()||control.courselist.get(i-1).getCompleted()){
-                    i++;
-                    j--;
+                if(control.courselist.get(i-1).getCourseType()==false&control.courselist.get(i-1).getCompleted()==true){
+                    j++;
+                    doTable(i,j);
                 }
             }else if(filter[0]==1&filter[1]==-1){
-                if(control.courselist.get(i-1).getCourseType()){
-                    i++;
-                    j--;
+                if(control.courselist.get(i-1).getCompleted()==false){
+                    j++;
+                    doTable(i,j);
                 }
             }else if(filter[0]==1&filter[1]==0){
-                if(control.courselist.get(i-1).getCourseType()||!control.courselist.get(i-1).getCompleted()){
-                    i++;
-                    j--;
+                if(control.courselist.get(i-1).getCourseType()==true&control.courselist.get(i-1).getCompleted()==false){
+                    j++;
+                    doTable(i,j);
                 }
             }else if(filter[0]==1&filter[1]==1){
-                if(control.courselist.get(i-1).getCourseType()||control.courselist.get(i-1).getCompleted()){
-                    i++;
-                    j--;
+                if(control.courselist.get(i-1).getCourseType()==false&control.courselist.get(i-1).getCompleted()==false){
+                    j++;
+                    doTable(i,j);
                 }
-            }else if(filter[0]==-1&filter[1]==-1){
-                jTable.setValueAt(control.courselist.get(i-1).getCourseName(), i, 0);
-                jTable.setValueAt(control.courselist.get(i-1).getYear(), i, 1);
-                jTable.setValueAt(convert(control.courselist.get(i-1).getCourseType()), i, 2);
-                jTable.setValueAt(control.courselist.get(i-1).getCredit(), i, 3);
-                jTable.setValueAt(control.courselist.get(i-1).getGPA(), i, 4);
+            }else if(filter[0]==-1&filter[1]==-1)
+            {
+                if(true) {
+                    //i++;
+                    j++;
+                    doTable(i,j);
+                    //continue;
+                }
             }
-            j++;
-            infoDefine(j, i);
         }
-    }
-
-    private void infoDefine(int j,int i){
-        info = new String[control.courselist.size()+1][5];
-        info[j][0]=control.courselist.get(i-1).getCourseName();
-        info[j][1]=Integer.toString(control.courselist.get(i-1).getYear());
-        info[j][2]=convert(control.courselist.get(i-1).getCourseType());
-        info[j][3]=Integer.toString(control.courselist.get(i-1).getCredit());
-        info[j][4]=Integer.toString(control.courselist.get(i-1).getGPA());
     }
 
     private String convert(Boolean type){
@@ -189,15 +204,11 @@ public class CourseFrame extends JFrame {
             res = "Optional";
         }
         return res;
-    }
+    }//转换
 
-    // private void refresh(){
-    //     DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-    //     model.setDataVector(info, tableHeader);
-    //     jTable.updateUI();
-    // }
 
-    private void setcolum(){
+    private void setcolum()//设置列宽度
+    {
         TableColumn column1 = jTable.getColumnModel().getColumn(0);
         column1.setPreferredWidth(200);
         TableColumn column2 = jTable.getColumnModel().getColumn(1);
@@ -210,9 +221,9 @@ public class CourseFrame extends JFrame {
         column5.setPreferredWidth(40);
     }
 
-    private void setTable()
+    private void setTable()//初始化表格
     {
-        this.jTable.setEnabled(false);
+        //this.jTable.setEnabled(false);
         this.setcolum();
         this.jTable.setValueAt("Course", 0, 0);
         this.jTable.setValueAt("Year", 0, 1);
@@ -221,4 +232,14 @@ public class CourseFrame extends JFrame {
         this.jTable.setValueAt("GPA", 0, 4);
         this.putTable.add(jTable);
     }
+    private void doTable(int i,int j)
+    {
+        this.jTable.setValueAt(control.courselist.get(i-1).getCourseName(), j, 0);
+        this.jTable.setValueAt(control.courselist.get(i-1).getYear(), j, 1);
+        this.jTable.setValueAt(convert(control.courselist.get(i-1).getCourseType()), j, 2);
+        this.jTable.setValueAt(control.courselist.get(i-1).getCredit(), j, 3);
+        this.jTable.setValueAt(control.courselist.get(i-1).getGPA(), j, 4);
+    }
+
 }
+
