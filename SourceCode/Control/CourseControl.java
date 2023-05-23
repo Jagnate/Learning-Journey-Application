@@ -18,6 +18,7 @@ public class CourseControl{
     public int[] coursecnt= new int[5];
     public int[] GPA= new int[5];
 
+
     public class maxGPA{
         private String             courseName;
         private int                GPA;
@@ -133,6 +134,7 @@ public class CourseControl{
                                             maxGPA[k].courseName=courselist.get(j).getCourseName();
                                         }
                                     }
+                                  
                                     coursecnt[courselist.get(j).getYear()]+=courselist.get(j).getGPA();
                                     sumGPA[courselist.get(j).getYear()]+=courselist.get(j).getGPA()*courselist.get(j).getCredit();
                                     if(Integer.parseInt(oneInfo[2])<60){
