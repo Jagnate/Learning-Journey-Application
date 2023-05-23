@@ -8,12 +8,14 @@ import java.awt.event.*;
 
 import control.CourseControl;
 import control.LineControl;
+import entity.Course;
 
-public class CourseFrame extends JFrame {
+public  class CourseFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 	private JPanel            filterSelect   = new JPanel();
     private JPanel            putTable       = new JPanel();
     private JPanel            showPercentage = new JPanel();
+    private JPanel            showGPA        = new JPanel();
     private JProgressBar      jProgressBar;
     private JComboBox<String> comboBox1      = new JComboBox<String>();
     private JComboBox<String> comboBox2      = new JComboBox<String>();
@@ -22,8 +24,8 @@ public class CourseFrame extends JFrame {
     private JButton           refreshButton  = new JButton("Refresh");
     private JButton           analysisButton = new JButton("Analysis");
     private String[][]        info;
-
     private JTable jTable;
+    private JScrollPane jsp = new JScrollPane(jTable);
     private int[] filter = {-1,-1};  
 
     private CourseControl control;
@@ -39,7 +41,7 @@ public class CourseFrame extends JFrame {
     
 
     public void init(){
-        jTable = new JTable(20,5);
+        jTable = new JTable(control.courselist.size()+2,5);
         setTitle("MyCourses");
         setBounds(100, 100, 450, 500);
         setP1();
@@ -73,6 +75,9 @@ public class CourseFrame extends JFrame {
         filterSelect.add(analysisButton);
         refreshButton.setBounds(400,0,40,40);
         filterSelect.add(refreshButton);
+        showGPA.setBounds(200,400,100,40);
+        JLabel putGPA = new JLabel("GPA:");
+        filterSelect.add(putGPA);
 
 
 
@@ -95,7 +100,9 @@ public class CourseFrame extends JFrame {
                 }
                 System.out.println(filter[0]+" "+filter[1]);
                 loadTable();
-
+                jsp.setViewportView(jTable);
+                putTable.add(jsp);
+                putTable.setLayout(new GridLayout(1, 1));
             }
         });
 
@@ -113,6 +120,12 @@ public class CourseFrame extends JFrame {
         showPercentage.setLayout(new FlowLayout());
     }
 
+//    public void setShowGPA(){
+//        JLabel putGPA = new JLabel("GPA:");
+//        filterSelect.add(putGPA);
+//        //showGPA.add("");
+//        showGPA.setLayout(new FlowLayout());
+//    }
     public void setJProgressBar(){
         jProgressBar.setStringPainted(true);
         jProgressBar.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -223,7 +236,7 @@ public class CourseFrame extends JFrame {
 
     private void setTable()//初始化表格
     {
-        //this.jTable.setEnabled(false);
+        this.jTable.setEnabled(false);
         this.setcolum();
         this.jTable.setValueAt("Course", 0, 0);
         this.jTable.setValueAt("Year", 0, 1);
