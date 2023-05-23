@@ -20,6 +20,7 @@ public class LineControl extends ApplicationFrame {
      *
 
      */
+    private int                GPA;
 
     private static final long serialVersionUID = 1L;
 
@@ -31,6 +32,18 @@ public class LineControl extends ApplicationFrame {
 
     }
 
+    /*public static void main(String[] args) {
+
+        LineControl fjc = new LineControl("Analysis");
+
+        fjc.pack();
+
+        RefineryUtilities.centerFrameOnScreen(fjc);
+
+        fjc.setVisible(true);
+
+    }
+*/
     public static void chart() {
 
         LineControl fjc = new LineControl("Analysis");
@@ -121,13 +134,13 @@ public class LineControl extends ApplicationFrame {
 
         String type4 = "forth year";
 
-        linedataset.addValue(92, series1, type1);
+        linedataset.addValue(GAP[1], series1, type1);
 
-        linedataset.addValue(80, series1, type2);
+        linedataset.addValue(GAP[2], series1, type2);
 
-        linedataset.addValue(99, series1, type3);
+        linedataset.addValue(GAP[3], series1, type3);
 
-        linedataset.addValue(88, series1, type4);
+        linedataset.addValue(GAP[4], series1, type4);
 
 
 
