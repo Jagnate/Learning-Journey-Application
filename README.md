@@ -7,7 +7,7 @@ This project is designed by Group 12.
 🎯Contributer:
 Jin, Yilun, Yuanchi, Yuxuan, Dan.
 
-##To run this code, you need:
+## To run this code, you need:
 Start the command in the folder src
 
 First, use this command to compile the code:
