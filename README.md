@@ -5,7 +5,7 @@ This project is designed by Group 12.
 
 
 🎯Contributer:
-Jin, Yilun, Yuanchi, Yuxuan, Dan.
+Jin, Yilun, Yuanchi, Tinghan, Yuxuan, Dan.
 
 ## To run this code, you need:
 Start the command in the folder src
