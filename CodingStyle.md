@@ -41,3 +41,18 @@ public int name(int aaa, String bbb){
   return ccc;
 }
 ```
+### Other comments
+```
+1. Attributes
+/** 
+ * This is the keyboard button, each button is a key.
+ */
+protected static JButton[] keyBoard = new JButton[28];
+
+2. Inside a function
+public int name(int aaa, String bbb){
+  if(){ //This if statement is used to
+      ...
+  }
+}
+```
