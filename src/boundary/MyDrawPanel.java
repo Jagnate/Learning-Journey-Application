@@ -1,16 +1,18 @@
+/**
+ *  Title      : MyDrawPanel.java
+ *  Description: A class that provides the colorful background panel.
+ * 
+ *  @author  Zhang Dan
+ *  @version 1.0
+ */
 package boundary;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @version 2.1
- * @auther ZhangDan
- * @data 2022/5/26 14:30
- */
 public class MyDrawPanel extends JPanel{
     private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      * #Description Make my own panel with gradient background.
      * @param g
      * @auther ZhangDan
