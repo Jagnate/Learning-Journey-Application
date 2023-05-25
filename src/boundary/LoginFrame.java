@@ -1,8 +1,11 @@
 /**
- * A class that provides a login and register interface for users.
- * @author Yuxuan Liu
- * @version 1.0
- *
+ *  Title      : LoginFrame.java
+ *  Description: A class that provides a login and register interface for users.
+ * 
+ *  In this version, we set up basic components.
+ *  @author  Zhang Dan
+ *  @author Liu yu xuan
+ *  @version 1.0
  */
 
  package boundary; 
@@ -17,12 +20,6 @@
  
  public class LoginFrame extends JFrame implements MouseListener
  {
-     // create a content panel component to add other components
-     // create button components
-     // create label components to provide information
-     // create url, icon, image ,buffered image to resize and sett icon components
-     // create textField components to collect input
- 
      private static final long serialVersionUID = 1L;
  
      private JPanel            contentPanel = new MyDrawPanel();
@@ -78,18 +75,10 @@
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          this.setResizable(false);
      }
- 
-     // /**
-     //  * This method sets the format of JTextField.
-     //  * @param field to be set
-     //  */
-     // private void textSet(JTextField field) {
-     //     field.setBackground(new Color(255, 255, 255));
-     //     field.setPreferredSize(new Dimension(150, 28));
-     //     MatteBorder border = new MatteBorder(0, 0, 2, 0, new Color(192, 192, 192));
-     //     field.setBorder(border);
-     // }
- 
+
+     /**
+      * This method sets the components of the main content panel.
+      */
      public void setPanel(){
          this.setTitle("Log In");
          this.setSize(350, 400);
@@ -106,7 +95,10 @@
          contentPanel.setOpaque(false);
          getContentPane().add(contentPanel);
      }
- 
+     
+     /**
+      * This method sets the GUI of account area.
+      */
      public void setAcc(){
          accHint.setBounds(40, 130, 100, 25);
          accHint.setForeground(new Color(25,25,112));
@@ -115,7 +107,10 @@
          accNum.setBounds(160, 130, 150, 25);
          accNum.setOpaque(true);
      }
- 
+     
+     /**
+      * This method sets the GUI of password area and the hint button.
+      */
      public void setPsw(){
          pswHint.setBounds(40, 200, 100, 25);
          pswHint.setForeground(new Color(25,25,112));
@@ -133,7 +128,10 @@
          hint.setText("?");
          hint.addMouseListener(this);
      }
- 
+     
+     /**
+      * This method sets the GUI of login button.
+      */
      public void setLogin(){
          login.setOpaque(true);
          login.setFont(new Font("Georgia", Font.ROMAN_BASELINE, 16));
@@ -143,8 +141,9 @@
          login.setBorder(BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
  
      }
+     
      /**
-      * This method sets event listening.
+      * This method sets event listening to the forget password button.
       */
      public void addListener(){
          login.addActionListener(new ActionListener(){
@@ -166,9 +165,11 @@
          });
      }
  
+    /**
+      * These methods can encrypt the user password.
+      */
      public void mouseEntered(MouseEvent e) {
          ((JPasswordField) psw).setEchoChar('\0');
-         System.out.println("111");
      }
      public void mouseClicked(MouseEvent e){}
      public void mouseReleased(MouseEvent e){}
@@ -177,6 +178,9 @@
          ((JPasswordField) psw).setEchoChar('*');
      }
  
+     /**
+      * This method check the stuent's ID and password .
+      */
      public void loginControl(){
          String tempID = logincontrol.checkID(accNum.getText(),psw.getText());
          if(tempID.equals("1")){
