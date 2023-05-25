@@ -17,7 +17,7 @@ Alignment!!!
 private JMenuBar    menuBar     = new JMenuBar();
 private JMenu       courseMenu  = new JMenu("Courses");
 private JMenu       skillsMenu  = new JMenu("Skills");
-private JMenu       achMenu  	  = new JMenu("Achivement");
+private JMenu       achMenu  	= new JMenu("Achivement");
 private JLabel[]    infoTitle   = new JLabel[6];
 
 ```
