@@ -37,7 +37,9 @@ public class CourseControl{
         this.calGPA();
         this.top3Course();
     }
-    
+    /**
+      * This method is used to calculate GPA.
+      */
     public void calGPA() {
     	int all_score = 0;
     	int all_credit = 0;
@@ -80,6 +82,9 @@ public class CourseControl{
     	return this.total;
     }
     
+    /**
+      * This method is used to calculate GPA.
+    */
     public void top3Course() {
     	int[] maxIndex = {-1,-1,-1,-1};
     	int[] index = new int[courselist.size()];
