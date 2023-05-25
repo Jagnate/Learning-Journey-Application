@@ -1,14 +1,19 @@
 /**
- * @version 2.1
- * @auther ZhangDan
- * @data 2023/3/25 22:24
+ *  Title      : GradientTextPanel.java
+ *  Description: A class that provides gradient color for the login title.
+ * 
+ *  @author  Zhang Dan
+ *  @author Liu yu xuan
+ *  @version 1.0
  */
-
 package boundary;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This is the method set the font of the title.
+ */
 public class GradientTextPanel extends JPanel
 {
     private static final long serialVersionUID = 1L;
