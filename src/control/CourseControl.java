@@ -83,8 +83,8 @@ public class CourseControl{
     }
     
     /**
-      * This method is used to calculate GPA.
-    */
+     * This method is used to calculate the top 3 GPAs.
+     */
     public void top3Course() {
     	int[] maxIndex = {-1,-1,-1,-1};
     	int[] index = new int[courselist.size()];
@@ -116,7 +116,10 @@ public class CourseControl{
     	this.top3[1]=courselist.get(maxIndex[1]);
     	this.top3[2]=courselist.get(maxIndex[2]);
     }
-
+	
+    /**
+     * This method is used to read course information.
+     */
     public void readCourses(String ID){
         try{
             FileReader     fileReader     = new FileReader("entity/StuCourse.txt");
@@ -143,6 +146,9 @@ public class CourseControl{
             System.exit(-1);
         }
     }
+    /**
+     * This method is used to read course information.
+     */
 
     public void readGeneralInfo(){
         try{
@@ -183,6 +189,9 @@ public class CourseControl{
             System.exit(-1);
         }
     }
+    /**
+     * This method is used to read student GPA.
+     */
 
     public void readPersonInfo(String ID, int year){
         try{
