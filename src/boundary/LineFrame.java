@@ -1,3 +1,11 @@
+/**
+ *  Title      : LineFrame.java
+ *  Description: This program is used to generate GPA line plots.
+ *
+ *  In this version, I implemented all of the above functions.
+ *  @author  Yilun Deng
+ *  @version 1.0
+ */
 package boundary;
 
 import org.jfree.chart.ChartFactory;
@@ -14,11 +22,6 @@ import javax.swing.*;
 
 public class LineFrame extends JFrame {
 
-    /**
-
-     *
-
-     */
 
     private static final long serialVersionUID = 1L;
 
@@ -53,15 +56,15 @@ public class LineFrame extends JFrame {
 
 // 定义图表对象
 
-        JFreeChart chart = ChartFactory.createLineChart("GPA", //折线图名称
+        JFreeChart chart = ChartFactory.createLineChart("GPA", 
 
-                "grade", // 横坐标e68a843231313335323631343130323136353331333361323632名称
+                "grade", 
 
-                "score", // 纵坐标名称
+                "score", 
 
-                linedataset, // 数据
+                linedataset, 
 
-                PlotOrientation.VERTICAL, // 水平显示图像
+                PlotOrientation.VERTICAL, 
 
                 true, // include legend
 
@@ -73,9 +76,9 @@ public class LineFrame extends JFrame {
 
         CategoryPlot plot = chart.getCategoryPlot();
 
-        plot.setRangeGridlinesVisible(true); //是否显示格子线
+        plot.setRangeGridlinesVisible(true); 
 
-        plot.setBackgroundAlpha(0.3f); //设置背景透明度
+        plot.setBackgroundAlpha(0.3f); 
 
         NumberAxis rangeAxis = (NumberAxis)plot.getRangeAxis();
 
