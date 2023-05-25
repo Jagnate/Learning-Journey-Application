@@ -6,7 +6,7 @@ public class Skill {
 
     public  ArrayList<Integer> courseList = new ArrayList<Integer>();
     private String             skillName;
-    private boolean            accquired;
+    public boolean            accquired;
 
     public String getSkillName()                {return this.skillName;}
   
