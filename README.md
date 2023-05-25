@@ -8,14 +8,14 @@ This project is designed by Group 12.
 Jin, Yilun, Yuanchi, Tinghan, Yuxuan, Dan.
 
 ## To run this code, you need:
-Start the command in the folder src
+First, Start the command in the folder src
 
-First, use this command to compile the code:
-javac -classpath .:./lib/jfreechart-1.5.0.jar:./lib/gnujaxp-1.jar:./lib/jcommon-1.0.24.jar test/test.java
+Second, use this command to compile the code:
+javac start/StartJourney.java
 
-Second, use this code to run this program:
-java test/test
+Finally, use this code to run this program:
+java -classpath .:./lib/jfreechart-1.5.0.jar:./lib/gnujaxp-1.jar:./lib/jcommon-1.0.24.jar start/StartJourney
 
 Now, enjoy our App!
 
-Notice: Your CV is in the folder src.
+Notice: Your CV is inside the folder src.
