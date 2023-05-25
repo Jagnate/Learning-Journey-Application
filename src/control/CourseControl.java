@@ -1,3 +1,15 @@
+/**
+ *  Title      : CourseControl.java
+ *  Description: This program is used to read and store all course information and each student's course information
+ *  In this version, xxx(changes and new functions)
+ *  @author  Yilun Deng
+ *  @version 1.0
+ *  
+ *  In this version, xxx
+ *  @author XXX
+ *  @author XXX
+ *  @version 1.1
+ */
 package control;
 
 import java.util.ArrayList;
