@@ -25,7 +25,7 @@ public class MainFrame extends JFrame{
     private JMenu       skillsMenu  = new JMenu("Skills");
     private JMenu       achMenu  	= new JMenu("Achivement");
     private JMenu		profileMenu = new JMenu("Profile");
-    private JPanel      mainPlane   = new JPanel();
+    private JPanel      mainPlane   = new MyDrawPanel();
     private JLabel      IDLabel     = new JLabel();
     private JLabel      nameLabel   = new JLabel();
     private JLabel      birthLabel  = new JLabel();
@@ -56,8 +56,8 @@ public class MainFrame extends JFrame{
     private String judegYear(){
         String title;
         Calendar date = Calendar.getInstance();
-        if(control.stu.getYear()+4>date.get(Calendar.YEAR)){
-            title = "Welcome Back to your Learning Journey!";
+        if(control.stu.getYear()+4<date.get(Calendar.YEAR)){
+            title = "Welcome Back to your Journey!";
         }else{
             title = "Welcome to your Learning Journey!";
         }

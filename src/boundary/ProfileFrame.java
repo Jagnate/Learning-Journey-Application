@@ -1,5 +1,6 @@
 package boundary;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.io.*;
 
@@ -36,7 +37,7 @@ public class ProfileFrame extends JFrame{
 	
 	private JButton		genButton	 = new JButton("Generate my CV!");
 	
-	private JPanel		mainPanel	 = new JPanel();
+	private JPanel		mainPanel	 = new MyDrawPanel();
 	
 	private CourseControl courseControl;
 	private SkillsControl skillsControl;
@@ -137,6 +138,11 @@ public class ProfileFrame extends JFrame{
 		mainPanel.add(achField3);
 		
 		genButton.setBounds(65,460,200,50);
+		genButton.setOpaque(true);
+        genButton.setBackground(new Color(240,200,221));
+        genButton.setBorderPainted(false);
+        genButton.setBorder(BorderFactory.createLoweredBevelBorder());
+        genButton.setForeground(new Color(25,25,112));
 		mainPanel.add(genButton);
 	}
 	

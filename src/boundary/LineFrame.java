@@ -7,13 +7,12 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 import javax.swing.*;
 
 
-public class LineFrame extends ApplicationFrame {
+public class LineFrame extends JFrame {
 
     /**
 
@@ -26,17 +25,12 @@ public class LineFrame extends ApplicationFrame {
     public LineFrame(String s,double score[]) {
 
         super(s);
-
         setContentPane(createDemoLine(score));
 
     }
 
     public void chart() {
-
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
         this.pack();
-
         RefineryUtilities.centerFrameOnScreen(this);
 
         this.setVisible(true);

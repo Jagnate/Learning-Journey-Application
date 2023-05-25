@@ -12,7 +12,7 @@ public class AchFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JTable accquiredAch;
 	private JTable suggestedAch;
-	private JPanel mainPanel = new JPanel();
+	private JPanel mainPanel = new MyDrawPanel();
 	private JLabel title = new JLabel("Achievements");
 	private JScrollPane  onePanel;
 	private JScrollPane  secondPanel;

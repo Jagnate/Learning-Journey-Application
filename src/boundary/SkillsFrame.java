@@ -17,7 +17,8 @@ public class SkillsFrame extends JFrame {
  
     private static final long serialVersionUID = 1L;
 	private JCheckBox[]   check;
-    private JPanel        p1            = new JPanel();
+    // private JPanel        mainPanel     = new MyDrawPanel();
+    private JPanel        p1            = new MyDrawPanel();
     private ScrollPane    scrollPane    = new ScrollPane(ScrollPane.SCROLLBARS_ALWAYS);
     private JPanel        p2            = new JPanel();
     private JProgressBar  jProgressBar;
@@ -35,9 +36,10 @@ public class SkillsFrame extends JFrame {
         skillsControl = new SkillsControl(ID);
         jProgressBar = new JProgressBar(SwingConstants.HORIZONTAL,0,skillsControl.skillslist.size());
         setTitle(title);
-        setBounds(100, 100, 400, 500);
+        setBounds(100, 100, 350, 450);
         setLayout(new FlowLayout(FlowLayout.CENTER,400,50));
         addSkills();
+        // setMain();
         setP1();
         setP2();
         setJProgressBar();
@@ -45,7 +47,14 @@ public class SkillsFrame extends JFrame {
         Container container = getContentPane();
         container.add(scrollPane);
         container.add(p2);
+        
     }
+
+    // public void setMain(){
+    //     mainPanel.add(p1);
+    //     mainPanel.add(p2);
+    //     mainPanel.setLayout(new GridLayout(2, 1));
+    // }
 
     public void addSkills(){
                   check      = new JCheckBox[skillsControl.skillslist.size()];

@@ -113,19 +113,4 @@ public class AchControl {
 		}
 	}
 	
-	public static void main(String[] args) {
-		AchControl achControl = new AchControl("jp2020213326");
-		for(int i=0;i<achControl.suggestedList.size();i++)
-			System.out.println(achControl.suggestedList.get(i));
-		System.out.println("!");
-		for(int i=0;i<achControl.getAchlist.size();i++)
-			System.out.println(achControl.getAchlist.get(i));
-		System.out.println("!!");
-		for(int i=0;i<achControl.ach_list.size();i++)
-			System.out.println(achControl.ach_list.get(i).getName());
-		System.out.println("!!!");
-		for(int i=0;i<achControl.skill_index_list.size();i++)
-			System.out.println(achControl.skill_index_list.get(i));
-	}
-	
 }

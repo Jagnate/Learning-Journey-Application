@@ -25,7 +25,7 @@
  
      private static final long serialVersionUID = 1L;
  
-     private JPanel            contentPanel = new JPanel();
+     private JPanel            contentPanel = new MyDrawPanel();
      // private JPanel         contentPanel = new MyDrawPanel();
      
      private JButton           login        = new JButton("I'm ready!");
@@ -136,8 +136,10 @@
  
      public void setLogin(){
          login.setOpaque(true);
+         login.setFont(new Font("Georgia", Font.ROMAN_BASELINE, 16));
+         login.setForeground(new Color(25,25,112));
          login.setBounds(75, 275, 200, 50);
-         login.setBackground(new Color(200,200,221));
+         login.setBackground(new Color(255,210,221));
          login.setBorder(BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
  
      }

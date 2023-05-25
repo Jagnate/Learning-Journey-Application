@@ -11,7 +11,7 @@ import control.CourseControl;
 public class CourseFrame extends JFrame {
 	
     private static final long serialVersionUID = 1L;
-    private JPanel	mainJPanel = new JPanel();
+    private JPanel	mainJPanel = new MyDrawPanel();
     private JProgressBar      jProgressBar;
     private JComboBox<String> comboBox1      = new JComboBox<String>();
     private JComboBox<String> comboBox2      = new JComboBox<String>();
@@ -57,6 +57,7 @@ public class CourseFrame extends JFrame {
         mainJPanel.add(comboBox2);
         
         analysisButton.setBounds(260,5,80,40);
+
         mainJPanel.add(analysisButton);
         refreshButton.setBounds(340,5,80,40);
         mainJPanel.add(refreshButton);
@@ -102,7 +103,6 @@ public class CourseFrame extends JFrame {
                 }else{
                     filter[1]=-1;
                 }
-                System.out.println(filter[0]+" "+filter[1]);
                 loadTable();
             }
         });
@@ -226,7 +226,6 @@ public class CourseFrame extends JFrame {
     {
         //this.jTable.setEnabled(false);
     	String[][] dataStrings = new String[control.courselist.size()][5] ;
-    	System.out.println(control.courselist.size());
         for(int i=0;i<control.courselist.size();i++) {
         	dataStrings[i][0] = control.courselist.get(i).getCourseName();
         	dataStrings[i][1] =	Integer.toString(control.courselist.get(i).getYear());
