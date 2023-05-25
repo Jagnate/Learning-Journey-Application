@@ -40,8 +40,9 @@ public class LineFrame extends JFrame {
 
     }
 
-// 生成显示图表的面板
-
+    /**
+      * This method is used to generate the panel that displays the chart.
+      */
     public JPanel createDemoLine(double score[]) {
 
         JFreeChart jfreechart = createChart(createDataset(score));
@@ -50,11 +51,12 @@ public class LineFrame extends JFrame {
 
     }
 
-// 生成图表主对象JFreeChart
-
+    /**
+      * This method is used to generate the chart master object JFreeChart.
+      */
     public JFreeChart createChart(DefaultCategoryDataset linedataset) {
 
-// 定义图表对象
+
 
         JFreeChart chart = ChartFactory.createLineChart("GPA", 
 
@@ -94,18 +96,18 @@ public class LineFrame extends JFrame {
 
     }
 
-// 生成数据
+
 
     public DefaultCategoryDataset createDataset(double score[]) {
 
         DefaultCategoryDataset linedataset = new DefaultCategoryDataset();
 
-// 各曲线名称
+
 
         String series1 = "";
 
 
-// 横轴名称(列名称)
+
 
         String type1 = "first year";
 
