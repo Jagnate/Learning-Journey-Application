@@ -1,13 +1,13 @@
 /**
  *  Title      : CourseControl.java
- *  Description: This program is used to read and store all course information and each student's course information
- *  In this version, xxx(changes and new functions)
+ *  Description: This program is used to read and store all course information and each student's course information.
+ *
+ *  In this version, I implemented all of the above functions.
  *  @author  Yilun Deng
  *  @version 1.0
  *  
- *  In this version, xxx
- *  @author XXX
- *  @author XXX
+ *  In this version, Jin Si fix some bugs.
+ *  @author Jin Si
  *  @version 1.1
  */
 package control;
