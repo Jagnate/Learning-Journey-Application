@@ -1,0 +1,12 @@
+index Achievement Skillindex
+1 NationalEnglishContestforCollegeStudents 11
+2 MathematicalContestInModeling 1_2
+3 StudentSupercomputerChallenge 1_2
+4 'Internet+'InnovationAndEntrepreneurshipCompetition 2_5_7_8
+5 NationalUndergraduateElectronicsDesignContest 2_6_9
+6 TheChineseMathematicsCompetition 1
+7 ChinaUndergraduatePhysicsTournament 1_3
+8 CollegeStudentPhysicsCompetition 1_3
+9 SoftwareDevelopmentCompetition 2_5_7
+10 CommunicationNetworkDeploymentDesignCompetition 2_4_5_10
+11 RobotCompetition 1_2_4_6_7_9_10
