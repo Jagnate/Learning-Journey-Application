@@ -66,8 +66,8 @@ public class AchFrame extends JFrame{
 	private void setTable() {
 		String[][] accdate = new String[control.ach_list.size()][1];
 		String[] accheader = {"Accquired Achievement"};
-		for(int i=0;i<control.ach_list.size();i++) {
-			accdate[i][0] = control.ach_list.get(i).getName();
+		for(int i=0;i<control.getAchlist.size();i++) {
+			accdate[i][0] = control.getAchlist.get(i);
 		}
 		
 		String[][] sugdate = new String[control.suggestedList.size()][1];
