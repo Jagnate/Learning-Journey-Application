@@ -1,3 +1,11 @@
+/**
+ *  Title      : CourseFrame.java
+ *  Description: A class that provides the Course interface for users.
+ *
+ *  @author  Yuanchi Zhou
+ *  @version 1.0
+ */
+
 package boundary;
 
 import javax.swing.*;
@@ -18,16 +26,18 @@ public class CourseFrame extends JFrame {
     private String[]          tableHeader    = {"Course","year","Type","Credit","GPA"};
     private JButton           refreshButton  = new JButton("Refresh");
     private JButton           analysisButton = new JButton("Analysis");
-    private JScrollPane		  scrollPane;
     private JLabel			  progressJLabel = new JLabel("Completion: ");
     private JLabel			  gpaJLabel 	 = new JLabel("GPA: ");
-
+    private JScrollPane		  scrollPane;
     private JTable jTable;
-    private int[] filter = {-1,-1};  
-
+    private int[] filter = {-1,-1};
     private CourseControl control;
     private LineFrame line ;
 
+    /**
+     * @param ID the student's ID
+     * @param year the student's year
+     */
     public CourseFrame(String ID,int year){
     	super("My Courses");
         control = new CourseControl(ID, year);
@@ -37,7 +47,9 @@ public class CourseFrame extends JFrame {
         this.setListner();
         this.setFrame();
     }
-    
+    /**
+     *This is the function used to construct the main interface
+     */
     private void setLayout() {
     	this.add(mainJPanel);
     	mainJPanel.setLayout(null);
@@ -131,8 +143,9 @@ public class CourseFrame extends JFrame {
         }
         return num;
     }
-
-    //filter: 0 all; 1 
+    /**
+     *This is the function used to determine the type of filter
+     */
     public void loadTable(){
         for(int m=0;m<control.courselist.size();m++)
         {
@@ -196,7 +209,10 @@ public class CourseFrame extends JFrame {
             }
         }
     }
-
+    /**
+     *This is the function used to transform the boolean type to string
+     * @param type the course's type
+     */
     private String convert(Boolean type){
         String res;
         if(type){
@@ -205,10 +221,11 @@ public class CourseFrame extends JFrame {
             res = "Optional";
         }
         return res;
-    }//转换
-
-
-    private void setcolum()//设置列宽度
+    }
+    /**
+     *This is the function used to set the width of each column
+     */
+    private void setcolum()
     {
         TableColumn column1 = jTable.getColumnModel().getColumn(0);
         column1.setPreferredWidth(200);
@@ -221,8 +238,10 @@ public class CourseFrame extends JFrame {
         TableColumn column5 = jTable.getColumnModel().getColumn(4);
         column5.setPreferredWidth(40);
     }
-
-    private void setTable()//初始化表格
+    /**
+     *This is the function used to init the jtable
+     */
+    private void setTable()
     {
         //this.jTable.setEnabled(false);
     	String[][] dataStrings = new String[control.courselist.size()][5] ;
