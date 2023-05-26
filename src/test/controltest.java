@@ -1,3 +1,11 @@
+/**
+ *  Title      : controltest.java
+ *  Description: A TDD to test the main function of our engineering
+ *
+ *  @author  Yuanchi Zhou
+ *  @version 1.0
+ */
+
 package test;
 
         import control.AchControl;
