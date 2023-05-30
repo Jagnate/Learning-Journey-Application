@@ -1,8 +1,10 @@
 # Learning-Journey-Application
 🚀This is the group project of EBU6304 Software Engineering 2023!  
-This project is designed by Group 12.  
+  
+  This project is designed by Group 12.  
+  
 🎯Contributer:  
-Jin, Yilun, Yuanchi, Tinghan, Yuxuan, Dan.  
+  Jin, Yilun, Yuanchi, Tinghan, Yuxuan, Dan.  
 
 ## To run this code, you need:
 First, Start the command in the folder src
