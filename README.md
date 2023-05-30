@@ -3,7 +3,7 @@
   
   This project is designed by Group 12.  
   
-🎯Contributer:  
+🎯Contributor:  
   
   Jin, Yilun, Yuanchi, Tinghan, Yuxuan, Dan.  
 
